@@ -1,0 +1,666 @@
+<!-- Developed by Victory | https://t.me/portfolio_by_victory -->
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketing Agency</title>
+  <meta name="description" content="Маркетинговое агентство — SMM, таргет, брендинг, веб-разработка">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/cursor.css">
+  <link rel="stylesheet" href="css/menu.css">
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor cursor-inner"></div>
+  <div class="cursor cursor-outer"></div>
+
+  <!-- Bubble particles container -->
+  <div class="bubbles-container" id="bubblesContainer"></div>
+
+  <!-- Depth Meter -->
+  <div class="depth-meter" id="depthMeter">
+    <div class="depth-meter__value"><span id="depthValue">0</span>m</div>
+    <div class="depth-meter__bar">
+      <div class="depth-meter__fill" id="depthFill"></div>
+    </div>
+    <div class="depth-meter__zone" id="depthZone">Поверхность</div>
+  </div>
+
+  <!-- Side Panel -->
+  <aside class="side-panel">
+    <a href="https://t.me/channel" target="_blank" rel="noopener" class="side-panel__btn" aria-label="Telegram" data-cursor-hover>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-16.5 7.5a2.25 2.25 0 0 0 .126 4.173l3.7 1.11a.75.75 0 0 0 .691-.128l8.5-6.5a.75.75 0 0 1 .97 1.144l-6.075 5.47a.75.75 0 0 0-.177.762l1.5 4.5a2.25 2.25 0 0 0 4.024.434l8.5-16.5a2.25 2.25 0 0 0-1.237-2.18 2.242 2.242 0 0 0-1-.001z"/>
+      </svg>
+    </a>
+    <a href="https://instagram.com/account" target="_blank" rel="noopener" class="side-panel__btn" aria-label="Instagram" data-cursor-hover>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5"/>
+        <circle cx="12" cy="12" r="5"/>
+        <circle cx="17.5" cy="6.5" r="1.5"/>
+      </svg>
+    </a>
+    <button class="side-panel__btn" id="scrollTopBtn" aria-label="Наверх" data-cursor-hover>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 19V5"/>
+        <path d="M5 12l7-7 7 7"/>
+      </svg>
+    </button>
+  </aside>
+
+  <!-- Header -->
+  <header class="header" id="header">
+    <!-- Cartoon Hands SVG -->
+    <div class="header__inner">
+      <a href="#" class="header__logo" data-cursor-hover>AGENCY</a>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Меню" data-cursor-hover>
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Astronaut Hands — white spacesuit gloves with metallic ring cuffs -->
+  <div class="header-hands" id="headerHands">
+    <!-- Left hand (flipped: arm top, fingers bottom — fingers appear first from above) -->
+    <svg class="hand hand-left" viewBox="0 0 140 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(0,240) scale(1,-1)">
+        <!-- Suit arm -->
+        <path d="M70 240 C68 215 60 180 62 150 C63 130 67 118 70 110" stroke="#D0D0D0" stroke-width="44" stroke-linecap="round" fill="none"/>
+        <path d="M70 240 C68 215 60 180 62 150 C63 130 67 118 70 110" stroke="#E8E8E8" stroke-width="40" stroke-linecap="round" fill="none"/>
+        <!-- Fabric wrinkle lines on arm -->
+        <path d="M52 170 Q70 165 88 170" stroke="#C0C0C0" stroke-width="1.2" fill="none" opacity="0.5"/>
+        <path d="M54 155 Q70 150 86 155" stroke="#C0C0C0" stroke-width="1.2" fill="none" opacity="0.5"/>
+        <!-- Metallic wrist ring -->
+        <ellipse cx="70" cy="112" rx="26" ry="10" fill="#111" stroke="#000" stroke-width="2"/>
+        <ellipse cx="70" cy="110" rx="26" ry="10" fill="#1A1A1A" stroke="#111" stroke-width="1.5"/>
+        <ellipse cx="70" cy="108" rx="24" ry="8" fill="#222" stroke="#111" stroke-width="1"/>
+        <!-- Highlight on ring -->
+        <path d="M50 108 Q70 104 90 108" stroke="#444" stroke-width="1.5" fill="none" opacity="0.6"/>
+        <!-- Glove (bulkier, padded spacesuit look) -->
+        <ellipse cx="68" cy="76" rx="34" ry="28" fill="#F0F0F0" stroke="#CCC" stroke-width="2"/>
+        <!-- Padding segments on glove -->
+        <path d="M36 80 Q68 90 100 80" stroke="#DDD" stroke-width="1.5" fill="none" opacity="0.4"/>
+        <path d="M40 70 Q68 78 96 70" stroke="#DDD" stroke-width="1.5" fill="none" opacity="0.3"/>
+        <!-- 5 Fingers (thick, padded spacesuit fingers) -->
+        <path d="M34 72 C28 56 24 38 30 26 C36 14 48 20 46 38 L44 56" fill="#F0F0F0" stroke="#BBB" stroke-width="2.5"/>
+        <path d="M48 66 C44 48 42 28 48 16 C54 4 64 10 62 30 L60 50" fill="#F0F0F0" stroke="#BBB" stroke-width="2.5"/>
+        <path d="M66 64 C64 46 64 24 70 14 C76 4 86 10 82 28 L78 48" fill="#F0F0F0" stroke="#BBB" stroke-width="2.5"/>
+        <path d="M82 66 C82 48 84 30 90 22 C96 12 104 20 100 36 L96 52" fill="#F0F0F0" stroke="#BBB" stroke-width="2.5"/>
+        <path d="M96 74 C98 60 102 46 106 40 C112 32 116 40 112 52 L106 64" fill="#F0F0F0" stroke="#BBB" stroke-width="2.5"/>
+        <!-- Finger segment lines (space glove joints) -->
+        <path d="M32 48 Q38 46 44 48" stroke="#CCC" stroke-width="1.2" fill="none"/>
+        <path d="M46 40 Q52 38 60 40" stroke="#CCC" stroke-width="1.2" fill="none"/>
+        <path d="M64 38 Q72 36 80 38" stroke="#CCC" stroke-width="1.2" fill="none"/>
+        <path d="M84 42 Q92 40 100 42" stroke="#CCC" stroke-width="1.2" fill="none"/>
+        <path d="M32 36 Q38 34 44 36" stroke="#CCC" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M46 28 Q52 26 60 28" stroke="#CCC" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M64 26 Q72 24 80 26" stroke="#CCC" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M84 30 Q92 28 100 30" stroke="#CCC" stroke-width="1" fill="none" opacity="0.6"/>
+        <!-- Knuckle bumps -->
+        <circle cx="40" cy="62" r="3.5" fill="#E8E8E8" stroke="#BBB" stroke-width="1"/>
+        <circle cx="56" cy="58" r="3.5" fill="#E8E8E8" stroke="#BBB" stroke-width="1"/>
+        <circle cx="74" cy="57" r="3.5" fill="#E8E8E8" stroke="#BBB" stroke-width="1"/>
+        <circle cx="90" cy="60" r="3.5" fill="#E8E8E8" stroke="#BBB" stroke-width="1"/>
+        <!-- Small flag patch on arm -->
+        <rect x="56" y="178" width="28" height="18" rx="2" fill="#1a3a6a" stroke="#0d2244" stroke-width="1" opacity="0.7"/>
+        <line x1="56" y1="184" x2="84" y2="184" stroke="#CC0000" stroke-width="2" opacity="0.6"/>
+        <line x1="56" y1="190" x2="84" y2="190" stroke="#fff" stroke-width="2" opacity="0.5"/>
+      </g>
+    </svg>
+
+    <!-- Right hand -->
+    <svg class="hand hand-right" viewBox="0 0 140 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(0,240) scale(1,-1)">
+        <path d="M70 240 C72 215 80 180 78 150 C77 130 73 118 70 110" stroke="#D0D0D0" stroke-width="44" stroke-linecap="round" fill="none"/>
+        <path d="M70 240 C72 215 80 180 78 150 C77 130 73 118 70 110" stroke="#E8E8E8" stroke-width="40" stroke-linecap="round" fill="none"/>
+        <path d="M52 170 Q70 165 88 170" stroke="#C0C0C0" stroke-width="1.2" fill="none" opacity="0.5"/>
+        <path d="M54 155 Q70 150 86 155" stroke="#C0C0C0" stroke-width="1.2" fill="none" opacity="0.5"/>
+        <ellipse cx="70" cy="112" rx="26" ry="10" fill="#111" stroke="#000" stroke-width="2"/>
+        <ellipse cx="70" cy="110" rx="26" ry="10" fill="#1A1A1A" stroke="#111" stroke-width="1.5"/>
+        <ellipse cx="70" cy="108" rx="24" ry="8" fill="#222" stroke="#111" stroke-width="1"/>
+        <path d="M50 108 Q70 104 90 108" stroke="#444" stroke-width="1.5" fill="none" opacity="0.6"/>
+        <ellipse cx="72" cy="76" rx="34" ry="28" fill="#F0F0F0" stroke="#CCC" stroke-width="2"/>
+        <path d="M40 80 Q72 90 104 80" stroke="#DDD" stroke-width="1.5" fill="none" opacity="0.4"/>
+        <path d="M44 70 Q72 78 100 70" stroke="#DDD" stroke-width="1.5" fill="none" opacity="0.3"/>
+        <!-- 5 Fingers mirrored -->
+        <path d="M106 72 C112 56 116 38 110 26 C104 14 92 20 94 38 L96 56" fill="#F0F0F0" stroke="#BBB" stroke-width="2.5"/>
+        <path d="M92 66 C96 48 98 28 92 16 C86 4 76 10 78 30 L80 50" fill="#F0F0F0" stroke="#BBB" stroke-width="2.5"/>
+        <path d="M74 64 C76 46 76 24 70 14 C64 4 54 10 58 28 L62 48" fill="#F0F0F0" stroke="#BBB" stroke-width="2.5"/>
+        <path d="M58 66 C58 48 56 30 50 22 C44 12 36 20 40 36 L44 52" fill="#F0F0F0" stroke="#BBB" stroke-width="2.5"/>
+        <path d="M44 74 C42 60 38 46 34 40 C28 32 24 40 28 52 L34 64" fill="#F0F0F0" stroke="#BBB" stroke-width="2.5"/>
+        <!-- Finger joints -->
+        <path d="M108 48 Q102 46 96 48" stroke="#CCC" stroke-width="1.2" fill="none"/>
+        <path d="M94 40 Q88 38 80 40" stroke="#CCC" stroke-width="1.2" fill="none"/>
+        <path d="M76 38 Q68 36 60 38" stroke="#CCC" stroke-width="1.2" fill="none"/>
+        <path d="M56 42 Q48 40 40 42" stroke="#CCC" stroke-width="1.2" fill="none"/>
+        <path d="M108 36 Q102 34 96 36" stroke="#CCC" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M94 28 Q88 26 80 28" stroke="#CCC" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M76 26 Q68 24 60 26" stroke="#CCC" stroke-width="1" fill="none" opacity="0.6"/>
+        <path d="M56 30 Q48 28 40 30" stroke="#CCC" stroke-width="1" fill="none" opacity="0.6"/>
+        <circle cx="100" cy="62" r="3.5" fill="#E8E8E8" stroke="#BBB" stroke-width="1"/>
+        <circle cx="84" cy="58" r="3.5" fill="#E8E8E8" stroke="#BBB" stroke-width="1"/>
+        <circle cx="66" cy="57" r="3.5" fill="#E8E8E8" stroke="#BBB" stroke-width="1"/>
+        <circle cx="50" cy="60" r="3.5" fill="#E8E8E8" stroke="#BBB" stroke-width="1"/>
+        <rect x="56" y="178" width="28" height="18" rx="2" fill="#1a3a6a" stroke="#0d2244" stroke-width="1" opacity="0.7"/>
+        <line x1="56" y1="184" x2="84" y2="184" stroke="#CC0000" stroke-width="2" opacity="0.6"/>
+        <line x1="56" y1="190" x2="84" y2="190" stroke="#fff" stroke-width="2" opacity="0.5"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Fullscreen Menu -->
+  <nav class="fullscreen-menu" id="fullscreenMenu">
+    <div class="fullscreen-menu__inner">
+      <a href="#hero" class="fullscreen-menu__link" data-cursor-hover>Главная</a>
+      <a href="#about" class="fullscreen-menu__link" data-cursor-hover>О нас</a>
+      <a href="#services" class="fullscreen-menu__link" data-cursor-hover>Услуги</a>
+      <a href="#portfolio" class="fullscreen-menu__link" data-cursor-hover>Портфолио</a>
+      <a href="#contact" class="fullscreen-menu__link" data-cursor-hover>Заявка</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero -->
+    <section class="section section-hero" id="hero">
+      <!-- Left Iceberg -->
+      <div class="hero-iceberg hero-iceberg--left">
+        <svg viewBox="0 0 300 700" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
+          <defs>
+            <linearGradient id="iceL1" x1="0.5" y1="0" x2="0.5" y2="1">
+              <stop offset="0%" stop-color="#E8F4F8"/>
+              <stop offset="35%" stop-color="#D0EAF0"/>
+              <stop offset="50%" stop-color="#A8D8E8"/>
+              <stop offset="70%" stop-color="#6BAFC7"/>
+              <stop offset="100%" stop-color="#3A7A94"/>
+            </linearGradient>
+            <linearGradient id="iceL2" x1="0.3" y1="0" x2="0.7" y2="1">
+              <stop offset="0%" stop-color="#F0F8FB"/>
+              <stop offset="40%" stop-color="#C5E3EE"/>
+              <stop offset="60%" stop-color="#8EC5D8"/>
+              <stop offset="100%" stop-color="#4A8DA5"/>
+            </linearGradient>
+          </defs>
+          <!-- Main body — smooth curves -->
+          <path d="M-20,0 L80,0 C95,15 105,35 115,45 C125,35 135,28 140,40 C155,65 165,75 175,80 C185,90 195,130 205,165 C212,195 215,220 210,260 C208,290 215,320 220,355 C218,390 205,410 200,440 C210,475 225,510 220,550 C215,580 210,610 205,640 Q195,670 180,700 L-20,700 Z" fill="url(#iceL1)" opacity="0.6"/>
+          <!-- Front face highlight -->
+          <path d="M80,0 C95,15 105,35 115,45 C125,35 135,28 140,40 C155,65 165,75 175,80 C185,90 195,130 205,165 C200,160 185,140 170,120 C155,95 140,70 125,50 C110,30 95,15 80,0 Z" fill="url(#iceL2)" opacity="0.4"/>
+          <!-- Snow highlights -->
+          <path d="M30,8 Q55,2 80,0 C90,12 100,28 108,38 Q85,32 60,18 Z" fill="#F5FBFD" opacity="0.7"/>
+          <path d="M135,32 C145,50 155,65 162,75 Q148,70 138,55 Q130,42 135,32 Z" fill="#EAF5F9" opacity="0.5"/>
+          <!-- Cracks — curved -->
+          <path d="M115,50 Q110,90 105,140 Q100,170 98,190" stroke="rgba(58,122,148,0.25)" stroke-width="1.5" fill="none"/>
+          <path d="M175,105 Q170,170 165,240 Q160,280 155,310" stroke="rgba(58,122,148,0.18)" stroke-width="1" fill="none"/>
+          <!-- Underwater glow -->
+          <ellipse cx="140" cy="520" rx="90" ry="160" fill="rgba(126,200,227,0.08)"/>
+        </svg>
+      </div>
+      <!-- Right Iceberg -->
+      <div class="hero-iceberg hero-iceberg--right">
+        <svg viewBox="0 0 300 700" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMax meet">
+          <defs>
+            <linearGradient id="iceR1" x1="0.5" y1="0" x2="0.5" y2="1">
+              <stop offset="0%" stop-color="#E0F0F5"/>
+              <stop offset="35%" stop-color="#C8E4ED"/>
+              <stop offset="50%" stop-color="#9CCFDF"/>
+              <stop offset="70%" stop-color="#5EA8BF"/>
+              <stop offset="100%" stop-color="#346E85"/>
+            </linearGradient>
+            <linearGradient id="iceR2" x1="0.7" y1="0" x2="0.3" y2="1">
+              <stop offset="0%" stop-color="#ECF6FA"/>
+              <stop offset="40%" stop-color="#BBD9E7"/>
+              <stop offset="60%" stop-color="#82BDD1"/>
+              <stop offset="100%" stop-color="#42829A"/>
+            </linearGradient>
+          </defs>
+          <!-- Main body — smooth curves -->
+          <path d="M320,0 L220,0 C205,20 198,40 195,55 C182,40 175,32 170,45 C155,75 140,90 130,100 C118,120 108,160 100,200 C95,240 98,275 105,315 C110,350 95,385 90,410 C95,445 105,475 110,510 C108,545 100,580 95,615 Q100,660 120,700 L320,700 Z" fill="url(#iceR1)" opacity="0.6"/>
+          <!-- Front face highlight -->
+          <path d="M220,0 C205,20 198,40 195,55 C182,40 175,32 170,45 C155,75 140,90 130,100 C118,120 108,160 100,200 C110,190 125,160 140,130 C155,100 175,65 195,40 C205,25 215,10 220,0 Z" fill="url(#iceR2)" opacity="0.4"/>
+          <!-- Snow highlights -->
+          <path d="M270,8 Q245,2 220,0 C212,15 205,30 198,42 Q218,35 242,20 Z" fill="#F5FBFD" opacity="0.7"/>
+          <path d="M172,38 C162,55 152,72 145,85 Q158,78 168,62 Q176,48 172,38 Z" fill="#EAF5F9" opacity="0.5"/>
+          <!-- Cracks — curved -->
+          <path d="M195,55 Q200,100 205,150 Q208,180 210,210" stroke="rgba(52,110,133,0.25)" stroke-width="1.5" fill="none"/>
+          <path d="M135,110 Q140,180 145,250 Q148,290 150,330" stroke="rgba(52,110,133,0.18)" stroke-width="1" fill="none"/>
+          <!-- Underwater glow -->
+          <ellipse cx="160" cy="520" rx="90" ry="160" fill="rgba(126,200,227,0.08)"/>
+        </svg>
+      </div>
+      <div class="container">
+        <span class="hero__tagline">Вершина айсберга</span>
+        <h1 class="hero__title" id="heroTitle">Создаём маркетинг<br>который работает</h1>
+        <p class="hero__subtitle">Комплексное продвижение вашего бизнеса в digital-пространстве.<br>Стратегия. Креатив. Результат.</p>
+        <a href="#contact" class="btn btn-primary" data-cursor-hover>Оставить заявку</a>
+      </div>
+    </section>
+
+    <!-- Waterline Divider -->
+    <div class="waterline">
+      <svg viewBox="0 0 1440 200" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="waveFade1" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(126,200,227,0.45)"/>
+            <stop offset="30%" stop-color="rgba(126,200,227,0.3)"/>
+            <stop offset="60%" stop-color="rgba(126,200,227,0.12)"/>
+            <stop offset="100%" stop-color="rgba(126,200,227,0)"/>
+          </linearGradient>
+          <linearGradient id="waveFade2" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(100,185,218,0.35)"/>
+            <stop offset="30%" stop-color="rgba(100,185,218,0.2)"/>
+            <stop offset="60%" stop-color="rgba(100,185,218,0.08)"/>
+            <stop offset="100%" stop-color="rgba(100,185,218,0)"/>
+          </linearGradient>
+          <linearGradient id="waveFade3" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="rgba(77,168,204,0.25)"/>
+            <stop offset="30%" stop-color="rgba(77,168,204,0.15)"/>
+            <stop offset="60%" stop-color="rgba(77,168,204,0.05)"/>
+            <stop offset="100%" stop-color="rgba(77,168,204,0)"/>
+          </linearGradient>
+        </defs>
+        <path class="waterline__wave waterline__wave--1" d="M0,30 C360,80 720,0 1080,30 C1260,55 1380,40 1440,30 L1440,200 L0,200 Z" fill="url(#waveFade1)"/>
+        <path class="waterline__wave waterline__wave--2" d="M0,40 C320,0 640,75 960,30 C1200,0 1360,55 1440,35 L1440,200 L0,200 Z" fill="url(#waveFade2)"/>
+        <path class="waterline__wave waterline__wave--3" d="M0,50 C240,20 480,70 720,40 C960,10 1200,65 1440,45 L1440,200 L0,200 Z" fill="url(#waveFade3)"/>
+      </svg>
+    </div>
+
+    <!-- About -->
+    <section class="section section-about" id="about">
+      <div class="container">
+        <h2 class="section__title">Что скрыто под поверхностью</h2>
+        <p class="section__text">То, что видит клиент — лишь вершина. Под поверхностью — стратегия, аналитика, креатив и технологии, которые двигают ваш бизнес вперёд.</p>
+        <div class="counters">
+          <div class="counter">
+            <span class="counter__number" data-target="150">0</span>
+            <span class="counter__plus">+</span>
+            <span class="counter__label">Проектов</span>
+          </div>
+          <div class="counter">
+            <span class="counter__number" data-target="80">0</span>
+            <span class="counter__plus">+</span>
+            <span class="counter__label">Клиентов</span>
+          </div>
+          <div class="counter">
+            <span class="counter__number" data-target="5">0</span>
+            <span class="counter__plus"></span>
+            <span class="counter__label">Лет опыта</span>
+          </div>
+          <div class="counter">
+            <span class="counter__number" data-target="12">0</span>
+            <span class="counter__plus"></span>
+            <span class="counter__label">Специалистов</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="section section-services" id="services">
+      <div class="container">
+        <h2 class="section__title">Глубинная работа</h2>
+        <p class="section__text">Каждый результат на поверхности — это часы работы в глубине</p>
+        <div class="services-grid">
+          <div class="service-card" data-cursor-hover>
+            <div class="service-card__icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 2H7a5 5 0 0 0-5 5v10a5 5 0 0 0 5 5h10a5 5 0 0 0 5-5V7a5 5 0 0 0-5-5z"/>
+                <path d="M12 8v8"/><path d="M8 12h8"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">SMM-продвижение</h3>
+            <p class="service-card__text">Ведение соцсетей, контент-план, рост аудитории и вовлечённости вашего бренда</p>
+            <ul class="service-card__list">
+              <li>Контент-стратегия и визуал</li>
+              <li>Рост подписчиков и охватов</li>
+              <li>Reels, Stories, вовлечённость</li>
+            </ul>
+          </div>
+          <div class="service-card" data-cursor-hover>
+            <div class="service-card__icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Таргетированная реклама</h3>
+            <p class="service-card__text">Настройка и ведение рекламных кампаний с максимальной отдачей от бюджета</p>
+            <ul class="service-card__list">
+              <li>Facebook, Instagram, VK Ads</li>
+              <li>A/B тестирование креативов</li>
+              <li>Ретаргетинг и look-alike</li>
+            </ul>
+          </div>
+          <div class="service-card" data-cursor-hover>
+            <div class="service-card__icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Брендинг и дизайн</h3>
+            <p class="service-card__text">Айдентика, логотипы, визуальный контент — создаём образ, который запоминается</p>
+            <ul class="service-card__list">
+              <li>Логотип и фирменный стиль</li>
+              <li>Гайдлайн и брендбук</li>
+              <li>Упаковка соцсетей</li>
+            </ul>
+          </div>
+          <div class="service-card" data-cursor-hover>
+            <div class="service-card__icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Веб-разработка</h3>
+            <p class="service-card__text">Создание сайтов и лендингов, которые конвертируют посетителей в клиентов</p>
+            <ul class="service-card__list">
+              <li>Лендинги и многостраничники</li>
+              <li>Интернет-магазины</li>
+              <li>Адаптив и анимации</li>
+            </ul>
+          </div>
+          <div class="service-card" data-cursor-hover>
+            <div class="service-card__icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+                <path d="M11 8v6"/><path d="M8 11h6"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">SEO-оптимизация</h3>
+            <p class="service-card__text">Поисковое продвижение, семантическое ядро, техническая оптимизация для роста трафика</p>
+            <ul class="service-card__list">
+              <li>Аудит и семантика</li>
+              <li>Внутренняя оптимизация</li>
+              <li>Линкбилдинг и контент</li>
+            </ul>
+          </div>
+          <div class="service-card" data-cursor-hover>
+            <div class="service-card__icon">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                <line x1="12" y1="22.08" x2="12" y2="12"/>
+              </svg>
+            </div>
+            <h3 class="service-card__title">Аналитика и стратегия</h3>
+            <p class="service-card__text">Глубокий анализ данных, конкурентная разведка и стратегическое планирование роста</p>
+            <ul class="service-card__list">
+              <li>Конкурентный анализ</li>
+              <li>Воронки и метрики</li>
+              <li>Стратегия на 3–12 месяцев</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio -->
+    <section class="section section-portfolio" id="portfolio">
+      <div class="container">
+        <h2 class="section__title">Наши глубины</h2>
+        <p class="section__text">Проекты, которые доказывают — глубина даёт результат</p>
+        <div class="portfolio-grid">
+          <div class="portfolio-card" data-cursor-hover>
+            <div class="portfolio-card__image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+              <svg class="portfolio-card__svg" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="55" r="30" stroke="rgba(255,255,255,0.7)" stroke-width="2.5"/>
+                <circle cx="100" cy="55" r="18" fill="rgba(255,255,255,0.35)"/>
+                <text x="100" y="60" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="14" font-weight="700">S</text>
+                <rect x="55" y="100" width="90" height="6" rx="3" fill="rgba(255,255,255,0.4)"/>
+                <rect x="70" y="112" width="60" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+              </svg>
+            </div>
+            <div class="portfolio-card__overlay">
+              <span class="portfolio-card__category">Брендинг</span>
+              <h3 class="portfolio-card__title">Ребрендинг кофейни "Sunrise"</h3>
+              <span class="portfolio-card__stat">+180% узнаваемость</span>
+            </div>
+          </div>
+          <div class="portfolio-card" data-cursor-hover>
+            <div class="portfolio-card__image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+              <svg class="portfolio-card__svg" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="40" y="30" width="120" height="75" rx="6" stroke="rgba(255,255,255,0.7)" stroke-width="2.5"/>
+                <rect x="50" y="42" width="45" height="8" rx="2" fill="rgba(255,255,255,0.4)"/>
+                <rect x="50" y="56" width="100" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+                <rect x="50" y="65" width="80" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+                <rect x="50" y="80" width="35" height="14" rx="7" fill="rgba(255,255,255,0.45)"/>
+                <circle cx="150" cy="45" r="5" fill="rgba(255,255,255,0.45)"/>
+                <rect x="70" y="115" width="60" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+              </svg>
+            </div>
+            <div class="portfolio-card__overlay">
+              <span class="portfolio-card__category">Веб-разработка</span>
+              <h3 class="portfolio-card__title">Интернет-магазин TechStore</h3>
+              <span class="portfolio-card__stat">конверсия 4.2%</span>
+            </div>
+          </div>
+          <div class="portfolio-card" data-cursor-hover>
+            <div class="portfolio-card__image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+              <svg class="portfolio-card__svg" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <polyline points="30,100 55,85 80,90 105,60 130,70 155,40 180,50" stroke="rgba(255,255,255,0.8)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="155" cy="40" r="4" fill="rgba(255,255,255,0.85)"/>
+                <line x1="30" y1="110" x2="180" y2="110" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
+                <rect x="40" y="120" width="30" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+                <rect x="85" y="120" width="30" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+                <rect x="130" y="120" width="30" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+              </svg>
+            </div>
+            <div class="portfolio-card__overlay">
+              <span class="portfolio-card__category">SMM</span>
+              <h3 class="portfolio-card__title">SMM для фитнес-клуба FitZone</h3>
+              <span class="portfolio-card__stat">+12K подписчиков за 3 мес</span>
+            </div>
+          </div>
+          <div class="portfolio-card" data-cursor-hover>
+            <div class="portfolio-card__image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+              <svg class="portfolio-card__svg" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="65" r="35" stroke="rgba(255,255,255,0.55)" stroke-width="2.5"/>
+                <path d="M100 30 A35 35 0 0 1 135 65" stroke="rgba(255,255,255,0.85)" stroke-width="4" stroke-linecap="round" fill="none"/>
+                <text x="100" y="70" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="16" font-weight="700">78%</text>
+                <rect x="55" y="115" width="90" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+              </svg>
+            </div>
+            <div class="portfolio-card__overlay">
+              <span class="portfolio-card__category">Таргет</span>
+              <h3 class="portfolio-card__title">Рекламная кампания ресторана</h3>
+              <span class="portfolio-card__stat">ROAS 780%</span>
+            </div>
+          </div>
+          <div class="portfolio-card" data-cursor-hover>
+            <div class="portfolio-card__image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+              <svg class="portfolio-card__svg" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="50" y="25" width="100" height="65" rx="4" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
+                <rect x="60" y="35" width="80" height="6" rx="3" fill="rgba(255,255,255,0.4)"/>
+                <rect x="60" y="47" width="50" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+                <rect x="60" y="57" width="65" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+                <rect x="60" y="70" width="30" height="12" rx="6" fill="rgba(255,255,255,0.45)"/>
+                <rect x="70" y="100" width="24" height="30" rx="3" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+                <rect x="106" y="100" width="24" height="30" rx="3" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+                <rect x="76" y="108" width="12" height="3" rx="1.5" fill="rgba(255,255,255,0.35)"/>
+                <rect x="112" y="108" width="12" height="3" rx="1.5" fill="rgba(255,255,255,0.35)"/>
+              </svg>
+            </div>
+            <div class="portfolio-card__overlay">
+              <span class="portfolio-card__category">Веб-разработка</span>
+              <h3 class="portfolio-card__title">Лендинг стартапа FinFlow</h3>
+              <span class="portfolio-card__stat">98/100 PageSpeed</span>
+            </div>
+          </div>
+          <div class="portfolio-card" data-cursor-hover>
+            <div class="portfolio-card__image" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">
+              <svg class="portfolio-card__svg" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="35" y="30" width="55" height="55" rx="6" fill="rgba(255,255,255,0.3)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+                <rect x="100" y="30" width="65" height="26" rx="4" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+                <rect x="100" y="62" width="65" height="23" rx="4" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+                <circle cx="62" cy="57" r="10" stroke="rgba(255,255,255,0.65)" stroke-width="2"/>
+                <path d="M58 57 L62 61 L68 53" stroke="rgba(255,255,255,0.8)" stroke-width="2" fill="none"/>
+                <rect x="50" y="100" width="100" height="5" rx="2.5" fill="rgba(255,255,255,0.3)"/>
+                <rect x="65" y="112" width="70" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+              </svg>
+            </div>
+            <div class="portfolio-card__overlay">
+              <span class="portfolio-card__category">Дизайн</span>
+              <h3 class="portfolio-card__title">Контент для бренда одежды</h3>
+              <span class="portfolio-card__stat">300+ единиц контента</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Form -->
+    <section class="section section-contact" id="contact">
+      <div class="container">
+        <h2 class="section__title">Готовы погрузиться?</h2>
+        <p class="section__text">Расскажите о вашем проекте — мы покажем, что скрыто под поверхностью</p>
+        <form class="contact-form" id="contactForm">
+          <input type="text" class="contact-form__input" name="name" placeholder="Ваше имя" required data-cursor-hover>
+          <input type="text" class="contact-form__input" name="contact" placeholder="Телефон или Email" required data-cursor-hover>
+          <textarea class="contact-form__textarea" name="message" placeholder="Сообщение" rows="4" data-cursor-hover></textarea>
+          <div class="contact-form__buttons">
+            <button type="submit" class="btn btn-primary" data-cursor-hover>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+              </svg>
+              Написать на почту
+            </button>
+            <a href="https://t.me/username" target="_blank" rel="noopener" class="btn btn-secondary" data-cursor-hover>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px">
+                <path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-16.5 7.5a2.25 2.25 0 0 0 .126 4.173l3.7 1.11a.75.75 0 0 0 .691-.128l8.5-6.5a.75.75 0 0 1 .97 1.144l-6.075 5.47a.75.75 0 0 0-.177.762l1.5 4.5a2.25 2.25 0 0 0 4.024.434l8.5-16.5a2.25 2.25 0 0 0-1.237-2.18 2.242 2.242 0 0 0-1-.001z"/>
+              </svg>
+              Написать в Telegram
+            </a>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="footer__copy">&copy; 2026 Agency. Все права защищены.</p>
+        <div class="footer__socials">
+          <a href="https://t.me/channel" target="_blank" rel="noopener" aria-label="Telegram" data-cursor-hover>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.198 2.433a2.242 2.242 0 0 0-1.022.215l-16.5 7.5a2.25 2.25 0 0 0 .126 4.173l3.7 1.11a.75.75 0 0 0 .691-.128l8.5-6.5a.75.75 0 0 1 .97 1.144l-6.075 5.47a.75.75 0 0 0-.177.762l1.5 4.5a2.25 2.25 0 0 0 4.024.434l8.5-16.5a2.25 2.25 0 0 0-1.237-2.18 2.242 2.242 0 0 0-1-.001z"/></svg>
+          </a>
+          <a href="https://instagram.com/account" target="_blank" rel="noopener" aria-label="Instagram" data-cursor-hover>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Fixed Scroll-Down Indicator with Iceberg -->
+  <a href="#" class="scroll-indicator" id="scrollIndicator" data-cursor-hover>
+    <div class="scroll-indicator__iceberg">
+      <svg viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <!-- Tip gradient: bright white-blue, sunlit -->
+          <linearGradient id="tipGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#f0f8ff"/>
+            <stop offset="40%" stop-color="#dceefb"/>
+            <stop offset="100%" stop-color="#b8ddf0"/>
+          </linearGradient>
+          <!-- Tip shadow side -->
+          <linearGradient id="tipShadow" x1="0" y1="0" x2="1" y2="0.5">
+            <stop offset="0%" stop-color="#c4dff0"/>
+            <stop offset="100%" stop-color="#93c5e0"/>
+          </linearGradient>
+          <!-- Underwater body gradient -->
+          <linearGradient id="bodyGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#7ec8e3" stop-opacity="0.6"/>
+            <stop offset="50%" stop-color="#4da8cc" stop-opacity="0.4"/>
+            <stop offset="100%" stop-color="#2a7da8" stop-opacity="0.25"/>
+          </linearGradient>
+          <!-- Deep body gradient -->
+          <linearGradient id="deepGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#3a8fb7" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#1b5e7e" stop-opacity="0.15"/>
+          </linearGradient>
+          <!-- Water surface shimmer -->
+          <linearGradient id="waterLine" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#48b5d6" stop-opacity="0.1"/>
+            <stop offset="30%" stop-color="#7dd3f0" stop-opacity="0.5"/>
+            <stop offset="50%" stop-color="#a8e4f8" stop-opacity="0.6"/>
+            <stop offset="70%" stop-color="#7dd3f0" stop-opacity="0.5"/>
+            <stop offset="100%" stop-color="#48b5d6" stop-opacity="0.1"/>
+          </linearGradient>
+          <!-- Glow filter for tip highlight -->
+          <filter id="tipGlow">
+            <feGaussianBlur stdDeviation="2" result="blur"/>
+            <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+          </filter>
+        </defs>
+
+        <!-- === TIP (above water) === -->
+        <!-- Main tip face — lit side -->
+        <polygon points="100,8 62,88 138,88" fill="url(#tipGrad)" filter="url(#tipGlow)"/>
+        <!-- Shadow face — right side darker -->
+        <polygon points="100,8 138,88 120,88 100,30" fill="url(#tipShadow)" opacity="0.6"/>
+        <!-- Snow/ice highlights on tip -->
+        <polygon points="92,28 100,12 108,28 104,40 96,40" fill="#ffffff" opacity="0.5"/>
+        <line x1="78" y1="60" x2="95" y2="55" stroke="#ffffff" stroke-width="1.5" opacity="0.4" stroke-linecap="round"/>
+        <line x1="105" y1="48" x2="125" y2="58" stroke="#ffffff" stroke-width="1" opacity="0.3" stroke-linecap="round"/>
+        <!-- Crack lines on tip -->
+        <path d="M90 45 L95 65 L88 80" stroke="#a0c8dd" stroke-width="0.8" fill="none" opacity="0.5"/>
+        <path d="M112 38 L108 58 L115 75" stroke="#90bcd4" stroke-width="0.7" fill="none" opacity="0.4"/>
+
+        <!-- === WATERLINE === -->
+        <rect x="0" y="86" width="200" height="5" fill="url(#waterLine)" rx="2.5"/>
+        <!-- Small ripples -->
+        <ellipse cx="55" cy="88" rx="25" ry="1.5" fill="#7dd3f0" opacity="0.25"/>
+        <ellipse cx="145" cy="89" rx="20" ry="1" fill="#7dd3f0" opacity="0.2"/>
+
+        <!-- === UNDERWATER BODY === -->
+        <!-- Main body — wider than tip, organic shape -->
+        <path d="M62,92 C55,92 38,110 30,140 C22,170 35,195 50,195 L150,195 C165,195 178,170 170,140 C162,110 145,92 138,92 Z"
+              fill="url(#bodyGrad)" stroke="#5bb0d0" stroke-width="0.5" stroke-opacity="0.3"/>
+        <!-- Body shadow face -->
+        <path d="M100,92 C110,92 145,110 155,140 C162,160 158,185 150,195 L100,195 Z"
+              fill="#2d8aad" opacity="0.15"/>
+        <!-- Ice texture lines underwater -->
+        <path d="M50 120 Q75 115 100 125 Q125 135 150 120" stroke="#8ed4ef" stroke-width="0.7" fill="none" opacity="0.3"/>
+        <path d="M42 145 Q80 140 110 150 Q140 155 165 145" stroke="#6dc0de" stroke-width="0.6" fill="none" opacity="0.25"/>
+        <path d="M48 170 Q85 165 115 172 Q145 178 160 170" stroke="#55aed0" stroke-width="0.5" fill="none" opacity="0.2"/>
+
+        <!-- === DEEP SECTION === -->
+        <path d="M50,195 C42,195 28,210 40,235 C48,250 70,258 100,258 C130,258 152,250 160,235 C172,210 158,195 150,195 Z"
+              fill="url(#deepGrad)" stroke="#3a8fb7" stroke-width="0.4" stroke-opacity="0.2"/>
+        <!-- Deep shadow -->
+        <path d="M100,195 C120,195 155,210 155,230 C155,248 130,258 100,258 Z"
+              fill="#1b5e7e" opacity="0.1"/>
+        <!-- Deep texture -->
+        <path d="M55 215 Q80 210 105 218 Q130 225 155 215" stroke="#4a9dbf" stroke-width="0.5" fill="none" opacity="0.15"/>
+        <path d="M65 238 Q85 232 105 240 Q130 246 148 238" stroke="#3a8fb7" stroke-width="0.4" fill="none" opacity="0.1"/>
+      </svg>
+    </div>
+    <span id="scrollIndicatorText">Погрузитесь глубже</span>
+    <svg class="scroll-indicator__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14"/><path d="M19 12l-7 7-7-7"/>
+    </svg>
+  </a>
+
+  <!-- Scripts -->
+  <script src="js/cursor.js" defer></script>
+  <script src="js/menu.js" defer></script>
+  <script src="js/animations.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
+<!-- Developed by Victory | https://t.me/portfolio_by_victory -->

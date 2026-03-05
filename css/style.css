@@ -29,6 +29,9 @@ body {
   cursor: none;
   /* Smooth depth gradient — applied dynamically via JS */
   --depth-progress: 0;
+  /* iOS safe areas */
+  padding-left: env(safe-area-inset-left, 0px);
+  padding-right: env(safe-area-inset-right, 0px);
 }
 
 /* Restore default cursor on touch devices */
@@ -78,7 +81,8 @@ img {
 .hero-iceberg {
   position: absolute;
   top: 0;
-  bottom: -200px;
+  bottom: -350px;
+  margin-top: 310px;
   width: 280px;
   z-index: 0;
   pointer-events: none;
@@ -129,6 +133,7 @@ img {
 /* Background gradient rendered by a fixed pseudo-element on main */
 main {
   position: relative;
+  --wl: 23%;
 }
 
 main::before {
@@ -136,23 +141,25 @@ main::before {
   position: fixed;
   inset: 0;
   z-index: -1;
+  /* Waterline position set dynamically by JS via --wl on main */
+  --wl1: calc(var(--wl) - 1.5%);
+  --wl2: calc(var(--wl) + 1%);
   background: linear-gradient(
     to bottom,
     #FAFAFA 0%,
-    #FAFAFA 22.5%,
-    #7EC8E3 24.5%,
-    #5BB8D8 33%,
-    #4DA8CC 38%,
-    #3A8FB7 46%,
-    #2A7A9E 54%,
-    #1E6585 62%,
-    #164F6B 70%,
-    #103A52 78%,
-    #0B2A3E 86%,
-    #071E2E 93%,
+    #FAFAFA var(--wl1),
+    #7EC8E3 var(--wl2),
+    #5BB8D8 calc(var(--wl) + 9%),
+    #4DA8CC calc(var(--wl) + 15%),
+    #3A8FB7 calc(var(--wl) + 23%),
+    #2A7A9E calc(var(--wl) + 31%),
+    #1E6585 calc(var(--wl) + 39%),
+    #164F6B calc(var(--wl) + 47%),
+    #103A52 calc(var(--wl) + 55%),
+    #0B2A3E calc(var(--wl) + 63%),
+    #071E2E calc(var(--wl) + 70%),
     #041520 100%
   );
-  /* The gradient moves with scroll via JS transform */
   height: var(--page-height, 300vh);
   position: absolute;
   pointer-events: none;
@@ -184,6 +191,11 @@ main::before {
   background: #FAFAFA;
   box-shadow: none;
   transition: box-shadow 0.6s ease;
+}
+
+/* iOS status bar cover — disabled */
+.ios-status-bar-cover {
+  display: none;
 }
 
 .header.is-fixed {
@@ -329,6 +341,59 @@ main::before {
   max-width: 600px;
 }
 
+/* ===== Hero Grid (photo block) ===== */
+.hero__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 48px;
+}
+
+.hero__photo-block {
+  text-align: center;
+}
+
+.hero__photo {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
+  position: relative;
+  box-shadow: 0 0 40px rgba(108, 99, 255, 0.25), 0 0 80px rgba(108, 99, 255, 0.1);
+  background: rgba(108, 99, 255, 0.1);
+}
+
+.hero__photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Placeholder when image fails to load */
+.hero__photo::after {
+  content: 'РА';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.7);
+  background: linear-gradient(135deg, rgba(108, 99, 255, 0.3), rgba(108, 99, 255, 0.15));
+  z-index: -1;
+}
+
+.hero__intro {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  opacity: 0.8;
+  max-width: 320px;
+  margin: 20px auto 0;
+}
+
 /* Iceberg inside scroll indicator */
 .scroll-indicator__iceberg {
   width: 90px;
@@ -386,7 +451,7 @@ main::before {
   position: relative;
   width: 100%;
   height: 300px;
-  margin-top: -60px;
+  margin-top: 10px;
   margin-bottom: -200px;
   z-index: 0;
   pointer-events: none;
@@ -858,7 +923,9 @@ main::before {
 }
 
 /* ===== Responsive ===== */
-@media (max-width: 1199px) {
+
+/* Tablet landscape / small desktop (≤1200px) */
+@media (max-width: 1200px) {
   .counters {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -873,21 +940,125 @@ main::before {
 
   .hero-iceberg {
     width: 180px;
+    margin-top: 310px;
+  }
+
+  .hero-iceberg svg {
+    transform: translateY(-80px);
+  }
+
+  .hero__grid {
+    gap: 32px;
+  }
+
+  .hero__photo {
+    width: 240px;
+    height: 240px;
   }
 }
 
+/* Tablet portrait (≤991px) */
+@media (max-width: 991px) {
+  .section {
+    padding: 80px 0;
+  }
+
+  .hero__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+
+  .hero__photo {
+    width: 220px;
+    height: 220px;
+  }
+
+  .hero__intro {
+    font-size: 0.875rem;
+    max-width: 260px;
+  }
+
+  .hero__subtitle {
+    max-width: 100%;
+  }
+
+  .service-card {
+    padding: 28px 24px;
+  }
+
+  .hero-iceberg {
+    width: 140px;
+  }
+
+  .side-panel {
+    right: 12px;
+  }
+
+  .side-panel__btn {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Mobile (≤767px) */
 @media (max-width: 767px) {
+  .container {
+    padding: 0 16px;
+  }
+
   .section {
     padding: 60px 0;
   }
 
   .section-hero {
     padding-top: 100px;
+    min-height: auto;
+    padding-bottom: 60px;
   }
 
+  /* Hero grid — single column, photo on top */
+  .hero__grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    text-align: center;
+  }
+
+  .hero__photo-block {
+    order: -1;
+  }
+
+  .hero__photo {
+    width: 180px;
+    height: 180px;
+  }
+
+  .hero__photo::after {
+    font-size: 2.5rem;
+  }
+
+  .hero__intro {
+    font-size: 0.85rem;
+    max-width: 300px;
+  }
+
+  .hero__subtitle {
+    max-width: 100%;
+    margin-bottom: 28px;
+  }
+
+  .hero__tagline {
+    letter-spacing: 2px;
+    font-size: 0.75rem;
+  }
+
+  /* Icebergs */
   .hero-iceberg {
-    width: 100px;
-    opacity: 0.5;
+    width: 80px;
+    opacity: 0.4;
+  }
+
+  .hero-iceberg svg {
+    transform: translateY(-280px);
   }
 
   .hero-iceberg--left {
@@ -898,17 +1069,65 @@ main::before {
     right: -20px;
   }
 
+  /* Section titles */
+  .section__title {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    margin-bottom: 16px;
+  }
+
+  .section__text {
+    font-size: 1rem;
+    margin-bottom: 32px;
+  }
+
+  /* Counters */
   .counters {
     grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
+    gap: 20px;
   }
 
+  .counter__label {
+    font-size: 0.85rem;
+  }
+
+  /* Services */
   .services-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
   }
 
+  .service-card {
+    padding: 24px 20px;
+  }
+
+  .service-card__title {
+    font-size: 1.1rem;
+  }
+
+  .service-card__text {
+    font-size: 0.9rem;
+  }
+
+  /* Portfolio */
   .portfolio-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .portfolio-card__overlay {
+    opacity: 1;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 70%);
+  }
+
+  .portfolio-card__title {
+    font-size: 1rem;
+  }
+
+  /* Contact */
+  .contact-form__input,
+  .contact-form__textarea {
+    padding: 14px 16px;
+    font-size: 0.95rem;
   }
 
   .contact-form__buttons {
@@ -917,6 +1136,13 @@ main::before {
 
   .btn {
     width: 100%;
+    padding: 14px 24px;
+    font-size: 0.95rem;
+  }
+
+  /* Footer */
+  .footer {
+    padding: 32px 0 24px;
   }
 
   .footer__inner {
@@ -925,27 +1151,181 @@ main::before {
     text-align: center;
   }
 
+  .footer__copy {
+    font-size: 0.8rem;
+  }
+
+  /* Side panel */
   .side-panel {
-    right: 10px;
+    right: 8px;
+    gap: 8px;
   }
 
   .side-panel__btn {
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
   }
 
+  .side-panel__btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Scroll indicator */
   .scroll-indicator {
     bottom: 16px;
     font-size: 0.75rem;
   }
 
   .scroll-indicator__iceberg {
-    width: 60px;
+    width: 55px;
   }
 
+  /* Waterline */
   .waterline {
     height: 200px;
     margin-top: -40px;
     margin-bottom: -140px;
+  }
+
+  /* Header */
+  .header {
+    padding: 14px 0;
+  }
+
+  .header__logo {
+    font-size: 1.25rem;
+  }
+}
+
+/* Small phones (≤480px) — iPhone SE, Galaxy S series etc. */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+
+  .section-hero {
+    padding-top: 80px;
+  }
+
+  .hero__grid {
+    gap: 20px;
+  }
+
+  .hero__photo {
+    width: 150px;
+    height: 150px;
+  }
+
+  .hero__photo::after {
+    font-size: 2rem;
+  }
+
+  .hero__intro {
+    font-size: 0.8rem;
+    max-width: 260px;
+    margin-top: 14px;
+  }
+
+  .hero__title {
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+    margin-bottom: 16px;
+  }
+
+  .hero__subtitle {
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  .hero__tagline {
+    font-size: 0.7rem;
+    margin-bottom: 12px;
+  }
+
+  .section {
+    padding: 48px 0;
+  }
+
+  .section__title {
+    font-size: 1.4rem;
+  }
+
+  .section__text {
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+
+  .counters {
+    gap: 16px;
+  }
+
+  .counter__number {
+    font-size: 2rem;
+  }
+
+  .counter__label {
+    font-size: 0.8rem;
+  }
+
+  .service-card {
+    padding: 20px 16px;
+  }
+
+  .service-card__icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .service-card__title {
+    font-size: 1rem;
+  }
+
+  .btn {
+    padding: 12px 20px;
+    font-size: 0.9rem;
+  }
+
+  .scroll-indicator__iceberg {
+    width: 45px;
+  }
+
+  .portfolio-card {
+    aspect-ratio: 16/10;
+  }
+
+  .header__inner {
+    padding: 0 12px;
+  }
+
+  .header__logo {
+    font-size: 1.1rem;
+    letter-spacing: 1.5px;
+  }
+
+  .depth-meter { display: none; }
+}
+
+/* Very small phones (≤360px) — iPhone SE 1st gen, Galaxy A series */
+@media (max-width: 360px) {
+  .hero__photo {
+    width: 130px;
+    height: 130px;
+  }
+
+  .hero__title {
+    font-size: 1.6rem;
+  }
+
+  .hero__subtitle {
+    font-size: 0.85rem;
+  }
+
+  .counter__number {
+    font-size: 1.75rem;
+  }
+
+  .fullscreen-menu__link {
+    font-size: 1.75rem;
   }
 }

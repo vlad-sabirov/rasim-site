@@ -3,7 +3,7 @@
   position: fixed;
   border-radius: 50%;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 99999;
   transform: translate(-50%, -50%);
   will-change: transform;
 }
@@ -37,9 +37,9 @@
   border-color: var(--accent);
 }
 
-/* Mix blend mode for contrast */
+/* Ensure cursor is always visible */
 .cursor-inner {
-  mix-blend-mode: difference;
+  box-shadow: 0 0 6px rgba(108, 99, 255, 0.6);
 }
 
 /* Hide on touch devices */

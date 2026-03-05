@@ -1,17 +1,27 @@
 // ===== Main Logic =====
 (function() {
 
-  // ----- Set page height for background gradient -----
-  function setPageHeight() {
+  // ----- Set page height & waterline position for background gradient -----
+  function updateGradient() {
     var main = document.querySelector('main');
-    if (main) {
-      document.documentElement.style.setProperty('--page-height', main.scrollHeight + 'px');
+    if (!main) return;
+
+    var pageH = main.scrollHeight;
+    document.documentElement.style.setProperty('--page-height', pageH + 'px');
+
+    // Calculate waterline position as % of total page height
+    // Use hero section bottom as anchor — water starts where hero ends
+    var hero = document.getElementById('hero');
+    if (hero && pageH > 0) {
+      var heroBottom = hero.offsetTop + hero.offsetHeight - main.offsetTop;
+      // Shift waterline up so gradient meets the waves earlier
+      var wlPercent = ((heroBottom + 120) / pageH) * 100;
+      main.style.setProperty('--wl', wlPercent + '%');
     }
   }
-  setPageHeight();
-  window.addEventListener('resize', setPageHeight);
-  // Recalculate after fonts/images load
-  window.addEventListener('load', setPageHeight);
+  updateGradient();
+  window.addEventListener('resize', updateGradient);
+  window.addEventListener('load', updateGradient);
 
   // ----- Scroll to Top Button -----
   var scrollTopBtn = document.getElementById('scrollTopBtn');

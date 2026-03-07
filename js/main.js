@@ -58,12 +58,9 @@
   window.addEventListener('scroll', updateSidePanelColor, { passive: true });
   updateSidePanelColor();
 
-  // ----- Contact Form: send via Telegram Bot -----
+  // ----- Contact Form: send via Cloudflare Worker -----
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {
-    var TG_TOKEN = '8758285312:AAFhrqXSIStbAgbEZpM9H2iO8WZ23Y3BXUk';
-    var TG_CHAT = '452385763';
-
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
 
@@ -76,20 +73,10 @@
       var contact = contactForm.querySelector('[name="contact"]').value;
       var message = contactForm.querySelector('[name="message"]').value;
 
-      var now = new Date();
-      var date = now.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
-      var time = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
-
-      var text = '\u{1F4E9} Новая заявка с сайта\n\n'
-        + '\u{1F4C5} Дата: ' + date + ' в ' + time + '\n'
-        + '\u{1F464} Имя: ' + name + '\n'
-        + '\u{1F4DE} Контакт: ' + contact + '\n'
-        + '\u{1F4AC} Сообщение: ' + message;
-
-      fetch('https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage', {
+      fetch('https://rasim-contact.vlad-sabirov.workers.dev', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: TG_CHAT, text: text })
+        body: JSON.stringify({ name: name, contact: contact, message: message })
       })
       .then(function(res) { return res.json(); })
       .then(function(data) {

@@ -76,8 +76,7 @@
         'Сообщение: ' + message
       );
 
-      // Replace with actual email
-      window.location.href = 'mailto:email@example.com?subject=' + subject + '&body=' + body;
+      window.location.href = 'mailto:sabirov.vlad0@gmail.com?subject=' + subject + '&body=' + body;
     });
   }
 

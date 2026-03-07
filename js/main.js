@@ -58,25 +58,40 @@
   window.addEventListener('scroll', updateSidePanelColor, { passive: true });
   updateSidePanelColor();
 
-  // ----- Contact Form: email button handler -----
+  // ----- Contact Form: send via FormSubmit.co -----
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
 
-      var name = contactForm.querySelector('[name="name"]').value;
-      var contact = contactForm.querySelector('[name="contact"]').value;
-      var message = contactForm.querySelector('[name="message"]').value;
+      var submitBtn = contactForm.querySelector('button[type="submit"]');
+      var originalText = submitBtn.textContent;
+      submitBtn.textContent = 'Отправка...';
+      submitBtn.disabled = true;
 
-      // Build mailto link
-      var subject = encodeURIComponent('Заявка с сайта от ' + name);
-      var body = encodeURIComponent(
-        'Имя: ' + name + '\n' +
-        'Контакт: ' + contact + '\n' +
-        'Сообщение: ' + message
-      );
+      var formData = new FormData(contactForm);
+      formData.append('_subject', 'Заявка с сайта от ' + formData.get('name'));
+      formData.append('_captcha', 'false');
 
-      window.location.href = 'mailto:sabirov.vlad0@gmail.com?subject=' + subject + '&body=' + body;
+      fetch('https://formsubmit.co/ajax/sabirov.vlad0@gmail.com', {
+        method: 'POST',
+        body: formData
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(data) {
+        if (data.success) {
+          contactForm.reset();
+          submitBtn.textContent = 'Отправлено!';
+          setTimeout(function() { submitBtn.textContent = originalText; submitBtn.disabled = false; }, 3000);
+        } else {
+          submitBtn.textContent = 'Ошибка, попробуйте ещё';
+          setTimeout(function() { submitBtn.textContent = originalText; submitBtn.disabled = false; }, 3000);
+        }
+      })
+      .catch(function() {
+        submitBtn.textContent = 'Ошибка, попробуйте ещё';
+        setTimeout(function() { submitBtn.textContent = originalText; submitBtn.disabled = false; }, 3000);
+      });
     });
   }
 

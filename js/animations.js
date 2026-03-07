@@ -202,6 +202,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var triggerPoint = header.offsetTop + headerH;
 
+  // Skip header sticky logic on mobile (header is hidden)
+  function isHeaderHidden() {
+    return window.getComputedStyle(header).display === 'none';
+  }
+
   // ----- Counter Animation -----
   document.querySelectorAll('.counter__number').forEach(function(counter) {
     var target = parseInt(counter.getAttribute('data-target'));
@@ -380,8 +385,8 @@ document.addEventListener('DOMContentLoaded', function() {
       var docHeight = document.documentElement.scrollHeight - window.innerHeight;
       var progress = docHeight > 0 ? Math.min(scrollY / docHeight, 1) : 0;
 
-      // --- Header ---
-      if (!animating) {
+      // --- Header (skip on mobile — header is hidden) ---
+      if (!animating && !isHeaderHidden()) {
         if (scrollY > triggerPoint && !isFixed) {
           attachHeader();
         } else if (scrollY <= triggerPoint && isFixed) {

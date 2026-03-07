@@ -71,7 +71,7 @@
       var message = contactForm.querySelector('[name="message"]').value.trim();
 
       if (!name) { alert('Пожалуйста, заполните поле "Ваше имя"'); return; }
-      if (!contact) { alert('Пожалуйста, заполните поле "Телефон или Email"'); return; }
+      if (!contact) { alert('Пожалуйста, заполните поле "Телефон"'); return; }
       if (!niche) { alert('Пожалуйста, заполните поле "Какая ваша ниша?"'); return; }
       if (!adsEl) { alert('Пожалуйста, выберите "Запускали ранее рекламу?"'); return; }
       if (!message) { alert('Пожалуйста, заполните поле "Сообщение"'); return; }

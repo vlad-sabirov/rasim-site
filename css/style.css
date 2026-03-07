@@ -1011,7 +1011,7 @@ main::before {
   }
 
   .section-hero {
-    padding-top: 100px;
+    padding-top: 32px;
     min-height: auto;
     padding-bottom: 60px;
   }

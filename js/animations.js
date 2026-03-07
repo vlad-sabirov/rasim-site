@@ -332,7 +332,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ===== Bubble Particles =====
   var bubbles = [];
-  var maxBubbles = 15;
+  var maxBubbles = 24;
 
   function createBubble() {
     if (bubbles.length >= maxBubbles) return;

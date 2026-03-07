@@ -1188,13 +1188,9 @@ main::before {
     margin-bottom: -140px;
   }
 
-  /* Header */
+  /* Header — hide on mobile */
   .header {
-    padding: 14px 0;
-  }
-
-  .header__logo {
-    font-size: 1.25rem;
+    display: none;
   }
 }
 

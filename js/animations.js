@@ -204,8 +204,12 @@ document.addEventListener('DOMContentLoaded', function() {
   var triggerPoint = header.offsetTop + headerH;
 
   // Skip header sticky logic on mobile (header is hidden)
+  var headerHidden = window.innerWidth <= 767;
+  window.addEventListener('resize', function() {
+    headerHidden = window.innerWidth <= 767;
+  });
   function isHeaderHidden() {
-    return window.getComputedStyle(header).display === 'none';
+    return headerHidden;
   }
 
   // ----- Counter Animation -----

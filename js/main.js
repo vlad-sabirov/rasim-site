@@ -58,9 +58,12 @@
   window.addEventListener('scroll', updateSidePanelColor, { passive: true });
   updateSidePanelColor();
 
-  // ----- Contact Form: send via FormSubmit.co -----
+  // ----- Contact Form: send via Telegram Bot -----
   var contactForm = document.getElementById('contactForm');
   if (contactForm) {
+    var TG_TOKEN = '8758285312:AAFhrqXSIStbAgbEZpM9H2iO8WZ23Y3BXUk';
+    var TG_CHAT = '452385763';
+
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
 
@@ -69,17 +72,23 @@
       submitBtn.textContent = 'Отправка...';
       submitBtn.disabled = true;
 
-      var formData = new FormData(contactForm);
-      formData.append('_subject', 'Заявка с сайта от ' + formData.get('name'));
-      formData.append('_captcha', 'false');
+      var name = contactForm.querySelector('[name="name"]').value;
+      var contact = contactForm.querySelector('[name="contact"]').value;
+      var message = contactForm.querySelector('[name="message"]').value;
 
-      fetch('https://formsubmit.co/ajax/sabirov.vlad0@gmail.com', {
+      var text = '\u{1F4E9} Новая заявка с сайта\n\n'
+        + '\u{1F464} Имя: ' + name + '\n'
+        + '\u{1F4DE} Контакт: ' + contact + '\n'
+        + '\u{1F4AC} Сообщение: ' + message;
+
+      fetch('https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage', {
         method: 'POST',
-        body: formData
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: TG_CHAT, text: text })
       })
       .then(function(res) { return res.json(); })
       .then(function(data) {
-        if (data.success) {
+        if (data.ok) {
           contactForm.reset();
           submitBtn.textContent = 'Отправлено!';
           setTimeout(function() { submitBtn.textContent = originalText; submitBtn.disabled = false; }, 3000);

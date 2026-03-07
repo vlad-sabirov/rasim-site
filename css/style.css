@@ -829,6 +829,131 @@ main::before {
   min-height: 120px;
 }
 
+.contact-form__field {
+  margin-bottom: 16px;
+}
+
+.contact-form__label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.95rem;
+  color: var(--dark-text);
+  margin-bottom: 8px;
+  opacity: 0.9;
+}
+
+.contact-form__hint {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  outline: none;
+}
+
+.contact-form__hint:hover,
+.contact-form__hint:focus {
+  color: var(--accent);
+}
+
+.contact-form__tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(10,10,10,0.95);
+  color: #fff;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  padding: 10px 14px;
+  border-radius: 10px;
+  width: 250px;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+  z-index: 10;
+}
+
+.contact-form__tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: rgba(10,10,10,0.95);
+}
+
+.contact-form__hint:hover .contact-form__tooltip,
+.contact-form__hint:focus .contact-form__tooltip,
+.contact-form__hint.is-active .contact-form__tooltip {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.contact-form__radio-group {
+  display: flex;
+  gap: 16px;
+}
+
+.contact-form__radio {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+  color: var(--dark-text);
+  opacity: 0.85;
+  cursor: pointer;
+  padding: 10px 20px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  transition: all var(--transition);
+}
+
+.contact-form__radio:hover {
+  border-color: var(--accent);
+}
+
+.contact-form__radio input[type="radio"] {
+  display: none;
+}
+
+.contact-form__radio-mark {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.3);
+  position: relative;
+  transition: border-color var(--transition);
+  flex-shrink: 0;
+}
+
+.contact-form__radio-mark::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: scale(0);
+  transition: transform 0.2s ease;
+}
+
+.contact-form__radio input[type="radio"]:checked ~ .contact-form__radio-mark {
+  border-color: var(--accent);
+}
+
+.contact-form__radio input[type="radio"]:checked ~ .contact-form__radio-mark::after {
+  transform: scale(1);
+}
+
+.contact-form__field .contact-form__input {
+  margin-bottom: 0;
+}
+
 .contact-form__buttons {
   display: flex;
   gap: 16px;

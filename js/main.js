@@ -71,12 +71,15 @@
 
       var name = contactForm.querySelector('[name="name"]').value;
       var contact = contactForm.querySelector('[name="contact"]').value;
+      var niche = contactForm.querySelector('[name="niche"]').value || '';
+      var adsEl = contactForm.querySelector('[name="ads"]:checked');
+      var ads = adsEl ? (adsEl.value === 'yes' ? 'Да' : 'Нет') : '';
       var message = contactForm.querySelector('[name="message"]').value;
 
       fetch('https://rasim-contact.vlad-sabirov.workers.dev', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name, contact: contact, message: message })
+        body: JSON.stringify({ name: name, contact: contact, niche: niche, ads: ads, message: message })
       })
       .then(function(res) { return res.json(); })
       .then(function(data) {
@@ -95,6 +98,19 @@
       });
     });
   }
+
+  // ----- Tooltip toggle on tap (mobile) -----
+  document.querySelectorAll('.contact-form__hint').forEach(function(hint) {
+    hint.addEventListener('click', function(e) {
+      e.stopPropagation();
+      hint.classList.toggle('is-active');
+    });
+  });
+  document.addEventListener('click', function() {
+    document.querySelectorAll('.contact-form__hint.is-active').forEach(function(h) {
+      h.classList.remove('is-active');
+    });
+  });
 
   // ----- Smooth scroll for all anchor links -----
   document.querySelectorAll('a[href^="#"]').forEach(function(link) {

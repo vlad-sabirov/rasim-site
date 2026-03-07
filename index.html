@@ -546,6 +546,33 @@
         <form class="contact-form" id="contactForm">
           <input type="text" class="contact-form__input" name="name" placeholder="Ваше имя" required data-cursor-hover>
           <input type="text" class="contact-form__input" name="contact" placeholder="Телефон или Email" required data-cursor-hover>
+          <div class="contact-form__field">
+            <div class="contact-form__label">
+              Какая ваша ниша?
+              <span class="contact-form__hint" data-cursor-hover tabindex="0">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+                <span class="contact-form__tooltip">Ниша — это сфера вашего бизнеса. Например: рестораны, фитнес, недвижимость, онлайн-образование и т.д.</span>
+              </span>
+            </div>
+            <input type="text" class="contact-form__input" name="niche" placeholder="Например: рестораны, фитнес, IT..." data-cursor-hover>
+          </div>
+          <div class="contact-form__field">
+            <div class="contact-form__label">Запускали ранее рекламу?</div>
+            <div class="contact-form__radio-group">
+              <label class="contact-form__radio" data-cursor-hover>
+                <input type="radio" name="ads" value="yes">
+                <span class="contact-form__radio-mark"></span>
+                Да
+              </label>
+              <label class="contact-form__radio" data-cursor-hover>
+                <input type="radio" name="ads" value="no">
+                <span class="contact-form__radio-mark"></span>
+                Нет
+              </label>
+            </div>
+          </div>
           <textarea class="contact-form__textarea" name="message" placeholder="Сообщение" rows="4" data-cursor-hover></textarea>
           <div class="contact-form__buttons">
             <button type="submit" class="btn btn-primary" data-cursor-hover>

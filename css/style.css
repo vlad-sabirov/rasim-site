@@ -207,8 +207,8 @@ main::before {
 }
 
 .header.dust-shadow {
-  box-shadow: 0 6px 24px rgba(190,180,165,0.35), 0 2px 8px rgba(190,180,165,0.2) !important;
-  transition: box-shadow 0s !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.05) !important;
+  transition: box-shadow 0.3s ease !important;
 }
 
 .header__inner {

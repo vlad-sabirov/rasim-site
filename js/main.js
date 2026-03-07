@@ -64,17 +64,24 @@
     contactForm.addEventListener('submit', function(e) {
       e.preventDefault();
 
+      var name = contactForm.querySelector('[name="name"]').value.trim();
+      var contact = contactForm.querySelector('[name="contact"]').value.trim();
+      var niche = contactForm.querySelector('[name="niche"]').value.trim();
+      var adsEl = contactForm.querySelector('[name="ads"]:checked');
+      var message = contactForm.querySelector('[name="message"]').value.trim();
+
+      if (!name) { alert('Пожалуйста, заполните поле "Ваше имя"'); return; }
+      if (!contact) { alert('Пожалуйста, заполните поле "Телефон или Email"'); return; }
+      if (!niche) { alert('Пожалуйста, заполните поле "Какая ваша ниша?"'); return; }
+      if (!adsEl) { alert('Пожалуйста, выберите "Запускали ранее рекламу?"'); return; }
+      if (!message) { alert('Пожалуйста, заполните поле "Сообщение"'); return; }
+
+      var ads = adsEl.value === 'yes' ? 'Да' : 'Нет';
+
       var submitBtn = contactForm.querySelector('button[type="submit"]');
       var originalText = submitBtn.textContent;
       submitBtn.textContent = 'Отправка...';
       submitBtn.disabled = true;
-
-      var name = contactForm.querySelector('[name="name"]').value;
-      var contact = contactForm.querySelector('[name="contact"]').value;
-      var niche = contactForm.querySelector('[name="niche"]').value || '';
-      var adsEl = contactForm.querySelector('[name="ads"]:checked');
-      var ads = adsEl ? (adsEl.value === 'yes' ? 'Да' : 'Нет') : '';
-      var message = contactForm.querySelector('[name="message"]').value;
 
       fetch('https://rasim-contact.vlad-sabirov.workers.dev', {
         method: 'POST',

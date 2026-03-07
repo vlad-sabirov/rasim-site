@@ -150,55 +150,15 @@ document.addEventListener('DOMContentLoaded', function() {
   function detachHeader() {
     if (!isFixed) return;
     if (currentTl) { currentTl.kill(); }
-    animating = true;
-
-    // Header stays fixed during entire animation — no jumps
+    isFixed = false;
+    animating = false;
+    currentTl = null;
     resetHands();
-
-    currentTl = gsap.timeline({
-      onComplete: function() {
-        isFixed = false;
-        animating = false;
-        currentTl = null;
-        makeHeaderRelative();
-        placeholder.style.display = 'none';
-        resetHands();
-        gsap.set(headerInner, { clearProps: 'transform' });
-        // Dust shadow fades out via CSS transition
-        header.classList.remove('dust-shadow');
-        ScrollTrigger.refresh();
-      }
-    });
-
-    // 1. Hands come down
-    currentTl.set(handsContainer, { opacity: 1 });
-    currentTl.set([handLeft, handRight], { top: -170, scaleX: 1, rotation: 0 });
-    currentTl.to(handLeft, { top: -55, rotation: 3, scaleX: 1.08, duration: 0.35, ease: 'power2.out' }, 0);
-    currentTl.to(handRight, { top: -55, rotation: -3, scaleX: 1.08, duration: 0.35, ease: 'power2.out' }, 0);
-
-    // 2. SLAM — hands press down hard, inner content squashes
-    currentTl.to(handLeft, { top: -40, scaleX: 1.18, rotation: 5, duration: 0.1, ease: 'power3.in' }, 0.35);
-    currentTl.to(handRight, { top: -40, scaleX: 1.18, rotation: -5, duration: 0.1, ease: 'power3.in' }, 0.35);
-    currentTl.to(headerInner, { scaleY: 0.85, scaleX: 1.02, duration: 0.08, ease: 'power3.in' }, 0.38);
-
-    // 3. Impact — dust + shadow (simultaneous with slam)
-    currentTl.call(function() {
-      var hRect = header.getBoundingClientRect();
-      createDustBurst(hRect.left + hRect.width * 0.1, hRect.bottom);
-      createDustBurst(hRect.left + hRect.width * 0.25, hRect.bottom);
-      createDustBurst(hRect.left + hRect.width * 0.5, hRect.bottom);
-      createDustBurst(hRect.left + hRect.width * 0.75, hRect.bottom);
-      createDustBurst(hRect.left + hRect.width * 0.9, hRect.bottom);
-      header.classList.add('dust-shadow');
-    }, null, 0.45);
-
-    // 4. Inner content bounces back
-    currentTl.to(headerInner, { scaleY: 1, scaleX: 1, duration: 0.4, ease: 'elastic.out(1.2, 0.35)' }, 0.46);
-
-    // 5. Hands release and go back up
-    currentTl.to(handLeft, { top: -170, rotation: -5, scaleX: 1, duration: 0.3, ease: 'power2.in' }, 0.55);
-    currentTl.to(handRight, { top: -170, rotation: 5, scaleX: 1, duration: 0.3, ease: 'power2.in' }, 0.55);
-    currentTl.set(handsContainer, { opacity: 0 }, 0.85);
+    makeHeaderRelative();
+    placeholder.style.display = 'none';
+    gsap.set(headerInner, { clearProps: 'transform' });
+    header.classList.remove('dust-shadow');
+    ScrollTrigger.refresh();
   }
 
   var triggerPoint = header.offsetTop + headerH;

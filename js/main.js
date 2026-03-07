@@ -76,7 +76,12 @@
       var contact = contactForm.querySelector('[name="contact"]').value;
       var message = contactForm.querySelector('[name="message"]').value;
 
+      var now = new Date();
+      var date = now.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
+      var time = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+
       var text = '\u{1F4E9} Новая заявка с сайта\n\n'
+        + '\u{1F4C5} Дата: ' + date + ' в ' + time + '\n'
         + '\u{1F464} Имя: ' + name + '\n'
         + '\u{1F4DE} Контакт: ' + contact + '\n'
         + '\u{1F4AC} Сообщение: ' + message;

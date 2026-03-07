@@ -116,33 +116,14 @@ document.addEventListener('DOMContentLoaded', function() {
   function attachHeader() {
     if (isFixed) return;
     if (currentTl) { currentTl.kill(); }
-    animating = true;
 
     placeholder.style.display = 'block';
     placeholder.style.height = headerH + 'px';
 
     makeHeaderFixed();
-    header.style.top = -(headerH + 20) + 'px';
+    header.style.top = '0';
 
-    resetHands();
-
-    currentTl = gsap.timeline({
-      onComplete: function() {
-        isFixed = true;
-        animating = false;
-        currentTl = null;
-        resetHands();
-      }
-    });
-
-    currentTl.set(handsContainer, { opacity: 1 });
-    currentTl.set([handLeft, handRight], { top: -170, scaleX: 1, rotation: 0 });
-    currentTl.to(handLeft, { top: -60, rotation: 3, scaleX: 1.06, duration: 0.5, ease: 'power2.out' }, 0);
-    currentTl.to(handRight, { top: -60, rotation: -3, scaleX: 1.06, duration: 0.5, ease: 'power2.out' }, 0);
-    currentTl.to(header, { top: -safeAreaTop, duration: 0.5, ease: 'power2.out' }, 0);
-    currentTl.to(handLeft, { top: -170, rotation: -5, scaleX: 1, duration: 0.3, ease: 'power2.in' }, 0.45);
-    currentTl.to(handRight, { top: -170, rotation: 5, scaleX: 1, duration: 0.3, ease: 'power2.in' }, 0.45);
-    currentTl.set(handsContainer, { opacity: 0 });
+    isFixed = true;
   }
 
   var headerInner = header.querySelector('.header__inner');

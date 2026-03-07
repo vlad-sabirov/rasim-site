@@ -332,7 +332,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ===== Bubble Particles =====
   var bubbles = [];
-  var maxBubbles = 30;
+  var maxBubbles = 15;
 
   function createBubble() {
     if (bubbles.length >= maxBubbles) return;
@@ -366,13 +366,24 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Bubble spawn timer
   var bubbleRate = 600;
+  var bubbleTimer = null;
   function scheduleBubble() {
-    setTimeout(function() {
-      createBubble();
+    bubbleTimer = setTimeout(function() {
+      if (!document.hidden) createBubble();
       scheduleBubble();
     }, bubbleRate);
   }
   scheduleBubble();
+
+  // Stop bubbles when tab is hidden
+  document.addEventListener('visibilitychange', function() {
+    if (document.hidden && bubbleTimer) {
+      clearTimeout(bubbleTimer);
+      bubbleTimer = null;
+    } else if (!document.hidden && !bubbleTimer) {
+      scheduleBubble();
+    }
+  });
 
   // ===== Single unified scroll handler with rAF =====
   var ticking = false;

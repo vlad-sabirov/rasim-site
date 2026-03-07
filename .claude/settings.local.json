@@ -1,9 +1,20 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python:*)",
-      "Bash(ipconfig:*)",
-      "Bash(gh auth:*)"
+      "Bash(git clone:*)",
+      "Bash(git:*)",
+      "Bash(mv:*)",
+      "Bash(ssh-keygen:*)",
+      "Bash(mkdir:*)",
+      "Bash(gh:*)",
+      "Bash(winget install:*)",
+      "Bash(where:*)",
+      "Bash(curl:*)",
+      "Bash(/c/Users/user/gh/gh.exe:*)",
+      "Bash(nslookup:*)",
+      "Bash(GH_HOST=github.com /c/Users/user/gh/gh.exe ssh-key:*)",
+      "Bash(ssh:*)",
+      "Bash(grep:*)"
     ]
   }
 }

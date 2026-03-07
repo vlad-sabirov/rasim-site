@@ -193,11 +193,6 @@ main::before {
   transition: box-shadow 0.6s ease;
 }
 
-/* iOS status bar cover — disabled */
-.ios-status-bar-cover {
-  display: none;
-}
-
 .header.is-fixed {
   position: fixed;
   top: 0;
@@ -579,6 +574,7 @@ main::before {
   border: 1px solid rgba(255, 255, 255, 0.25);
   pointer-events: none;
   box-shadow: 0 0 4px rgba(255,255,255,0.1);
+  will-change: transform, opacity;
 }
 
 /* ===== Buttons ===== */
@@ -667,6 +663,7 @@ main::before {
   padding: 40px 32px;
   transition: all var(--transition);
   color: var(--dark-text);
+  will-change: transform, opacity;
 }
 
 .service-card:hover {
@@ -734,6 +731,7 @@ main::before {
   overflow: hidden;
   aspect-ratio: 4/3;
   cursor: none;
+  will-change: transform, opacity;
 }
 
 .portfolio-card__image {
@@ -853,16 +851,6 @@ main::before {
 .footer__copy {
   font-size: 0.875rem;
   opacity: 0.5;
-}
-
-.footer__dev-link {
-  color: var(--accent);
-  opacity: 1;
-  transition: opacity var(--transition);
-}
-
-.footer__dev-link:hover {
-  opacity: 0.7;
 }
 
 .footer__socials {

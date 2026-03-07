@@ -275,8 +275,10 @@ main::before {
 
 .hand {
   position: absolute;
+  top: -170px;
   width: 95px;
   height: 160px;
+  will-change: transform;
   top: -170px; /* hidden above viewport */
   filter: drop-shadow(0 6px 16px rgba(0,0,0,0.3));
 }

@@ -37,14 +37,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // ----- Dust Particles -----
   function createDustBurst(x, y) {
-    for (var i = 0; i < 12; i++) {
+    for (var i = 0; i < 6; i++) {
       var p = document.createElement('div');
       p.className = 'dust-particle';
       p.style.left = x + 'px';
       p.style.top = y + 'px';
       document.body.appendChild(p);
 
-      var angle = (Math.PI * 2 / 12) * i + (Math.random() - 0.5);
+      var angle = (Math.PI * 2 / 6) * i + (Math.random() - 0.5);
       var dist = 30 + Math.random() * 60;
       var size = 4 + Math.random() * 6;
 
@@ -79,10 +79,8 @@ document.addEventListener('DOMContentLoaded', function() {
   function resetHands() {
     gsap.killTweensOf([handLeft, handRight, handsContainer]);
     handsContainer.style.opacity = '0';
-    handLeft.style.top = '-170px';
-    handRight.style.top = '-170px';
-    handLeft.style.transform = '';
-    handRight.style.transform = '';
+    gsap.set(handLeft, { y: 0, scaleX: 1, rotation: 0 });
+    gsap.set(handRight, { y: 0, scaleX: 1, rotation: 0 });
   }
 
   var isMobile = window.innerWidth <= 767;
@@ -136,12 +134,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     currentTl.set(handsContainer, { opacity: 1 });
-    currentTl.set([handLeft, handRight], { top: -170, scaleX: 1, rotation: 0 });
-    currentTl.to(handLeft, { top: -60, rotation: 3, scaleX: 1.06, duration: 0.5, ease: 'power2.out' }, 0);
-    currentTl.to(handRight, { top: -60, rotation: -3, scaleX: 1.06, duration: 0.5, ease: 'power2.out' }, 0);
+    currentTl.set([handLeft, handRight], { y: 0, scaleX: 1, rotation: 0 });
+    currentTl.to(handLeft, { y: 110, rotation: 3, scaleX: 1.06, duration: 0.5, ease: 'power2.out' }, 0);
+    currentTl.to(handRight, { y: 110, rotation: -3, scaleX: 1.06, duration: 0.5, ease: 'power2.out' }, 0);
     currentTl.to(header, { top: -safeAreaTop, duration: 0.5, ease: 'power2.out' }, 0);
-    currentTl.to(handLeft, { top: -170, rotation: -5, scaleX: 1, duration: 0.3, ease: 'power2.in' }, 0.45);
-    currentTl.to(handRight, { top: -170, rotation: 5, scaleX: 1, duration: 0.3, ease: 'power2.in' }, 0.45);
+    currentTl.to(handLeft, { y: 0, rotation: -5, scaleX: 1, duration: 0.3, ease: 'power2.in' }, 0.45);
+    currentTl.to(handRight, { y: 0, rotation: 5, scaleX: 1, duration: 0.3, ease: 'power2.in' }, 0.45);
     currentTl.set(handsContainer, { opacity: 0 });
   }
 
@@ -172,23 +170,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // 1. Hands come down
     currentTl.set(handsContainer, { opacity: 1 });
-    currentTl.set([handLeft, handRight], { top: -170, scaleX: 1, rotation: 0 });
-    currentTl.to(handLeft, { top: -55, rotation: 3, scaleX: 1.08, duration: 0.35, ease: 'power2.out' }, 0);
-    currentTl.to(handRight, { top: -55, rotation: -3, scaleX: 1.08, duration: 0.35, ease: 'power2.out' }, 0);
+    currentTl.set([handLeft, handRight], { y: 0, scaleX: 1, rotation: 0 });
+    currentTl.to(handLeft, { y: 115, rotation: 3, scaleX: 1.08, duration: 0.35, ease: 'power2.out' }, 0);
+    currentTl.to(handRight, { y: 115, rotation: -3, scaleX: 1.08, duration: 0.35, ease: 'power2.out' }, 0);
 
     // 2. SLAM — hands press down hard, inner content squashes
-    currentTl.to(handLeft, { top: -40, scaleX: 1.18, rotation: 5, duration: 0.1, ease: 'power3.in' }, 0.35);
-    currentTl.to(handRight, { top: -40, scaleX: 1.18, rotation: -5, duration: 0.1, ease: 'power3.in' }, 0.35);
+    currentTl.to(handLeft, { y: 130, scaleX: 1.18, rotation: 5, duration: 0.1, ease: 'power3.in' }, 0.35);
+    currentTl.to(handRight, { y: 130, scaleX: 1.18, rotation: -5, duration: 0.1, ease: 'power3.in' }, 0.35);
     currentTl.to(headerInner, { scaleY: 0.85, scaleX: 1.02, duration: 0.08, ease: 'power3.in' }, 0.38);
 
     // 3. Impact — dust + shadow (simultaneous with slam)
     currentTl.call(function() {
       var hRect = header.getBoundingClientRect();
-      createDustBurst(hRect.left + hRect.width * 0.1, hRect.bottom);
-      createDustBurst(hRect.left + hRect.width * 0.25, hRect.bottom);
+      createDustBurst(hRect.left + hRect.width * 0.2, hRect.bottom);
       createDustBurst(hRect.left + hRect.width * 0.5, hRect.bottom);
-      createDustBurst(hRect.left + hRect.width * 0.75, hRect.bottom);
-      createDustBurst(hRect.left + hRect.width * 0.9, hRect.bottom);
+      createDustBurst(hRect.left + hRect.width * 0.8, hRect.bottom);
       header.classList.add('dust-shadow');
     }, null, 0.45);
 
@@ -196,8 +192,8 @@ document.addEventListener('DOMContentLoaded', function() {
     currentTl.to(headerInner, { scaleY: 1, scaleX: 1, duration: 0.4, ease: 'elastic.out(1.2, 0.35)' }, 0.46);
 
     // 5. Hands release and go back up
-    currentTl.to(handLeft, { top: -170, rotation: -5, scaleX: 1, duration: 0.3, ease: 'power2.in' }, 0.55);
-    currentTl.to(handRight, { top: -170, rotation: 5, scaleX: 1, duration: 0.3, ease: 'power2.in' }, 0.55);
+    currentTl.to(handLeft, { y: 0, rotation: -5, scaleX: 1, duration: 0.3, ease: 'power2.in' }, 0.55);
+    currentTl.to(handRight, { y: 0, rotation: 5, scaleX: 1, duration: 0.3, ease: 'power2.in' }, 0.55);
     currentTl.set(handsContainer, { opacity: 0 }, 0.85);
   }
 

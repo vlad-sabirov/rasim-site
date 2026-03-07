@@ -71,6 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var placeholder = document.createElement('div');
   placeholder.style.display = 'none';
+  placeholder.style.background = '#FAFAFA';
   header.parentNode.insertBefore(placeholder, header.nextSibling);
 
   var headerH = header.offsetHeight;

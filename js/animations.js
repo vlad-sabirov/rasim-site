@@ -35,30 +35,6 @@ document.addEventListener('DOMContentLoaded', function() {
   gsap.from('.hero__subtitle', { opacity: 0, y: 20, duration: 0.8, delay: 1 });
   gsap.from('.section-hero .btn', { opacity: 0, y: 20, duration: 0.8, delay: 1.2 });
 
-  // ----- Dust Particles -----
-  function createDustBurst(x, y) {
-    for (var i = 0; i < 6; i++) {
-      var p = document.createElement('div');
-      p.className = 'dust-particle';
-      p.style.left = x + 'px';
-      p.style.top = y + 'px';
-      document.body.appendChild(p);
-
-      var angle = (Math.PI * 2 / 6) * i + (Math.random() - 0.5);
-      var dist = 30 + Math.random() * 60;
-      var size = 4 + Math.random() * 6;
-
-      gsap.set(p, { width: size, height: size, opacity: 0.8 });
-      gsap.to(p, {
-        x: Math.cos(angle) * dist,
-        y: Math.sin(angle) * dist,
-        opacity: 0, scale: 0,
-        duration: 0.6 + Math.random() * 0.4,
-        ease: 'power2.out',
-        onComplete: function() { if (p.parentNode) p.parentNode.removeChild(p); }
-      });
-    }
-  }
 
   // ----- Header Sticky with Cartoon Hands -----
   var header = document.getElementById('header');
@@ -179,12 +155,8 @@ document.addEventListener('DOMContentLoaded', function() {
     currentTl.to(handRight, { y: 130, scaleX: 1.18, rotation: -5, duration: 0.1, ease: 'power3.in' }, 0.35);
     currentTl.to(headerInner, { scaleY: 0.85, scaleX: 1.02, duration: 0.08, ease: 'power3.in' }, 0.38);
 
-    // 3. Impact — dust + shadow (simultaneous with slam)
+    // 3. Impact — shadow
     currentTl.call(function() {
-      var hRect = header.getBoundingClientRect();
-      createDustBurst(hRect.left + hRect.width * 0.2, hRect.bottom);
-      createDustBurst(hRect.left + hRect.width * 0.5, hRect.bottom);
-      createDustBurst(hRect.left + hRect.width * 0.8, hRect.bottom);
       header.classList.add('dust-shadow');
     }, null, 0.45);
 

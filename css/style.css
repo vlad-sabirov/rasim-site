@@ -291,16 +291,6 @@ main::before {
   left: calc(50% + 50px);
 }
 
-/* Dust particles */
-.dust-particle {
-  position: fixed;
-  border-radius: 50%;
-  background: rgba(200, 185, 165, 0.5);
-  pointer-events: none;
-  z-index: 1003;
-  box-shadow: 0 0 3px rgba(200, 185, 165, 0.3);
-}
-
 @media (max-width: 767px) {
   .header-hands { display: none; }
 }

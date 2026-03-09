@@ -377,8 +377,10 @@
   function toggleMute() {
     if (!started) {
       initAudio();
+      if (ctx && ctx.state === 'suspended') ctx.resume();
       return;
     }
+    if (ctx && ctx.state === 'suspended') ctx.resume();
     muted = !muted;
     if (muted) {
       smoothSetVolume(0);
@@ -398,40 +400,37 @@
     btn.setAttribute('aria-label', muted ? 'Включить звук' : 'Выключить звук');
   }
 
-  // Start on first interaction — mobile requires touchstart/touchend + resume()
-  var interactionEvents = ['click', 'scroll', 'touchstart', 'touchend', 'keydown'];
+  // ===== Mobile audio unlock =====
+  // iOS/Android require AudioContext creation + resume inside a direct user gesture (touch/click).
+  // scroll does NOT count as user gesture on mobile.
+  // We keep trying on every touch/click until audio is running.
 
-  function onFirstInteraction() {
-    if (started) {
-      // Already started but context may be suspended (iOS Safari)
-      if (ctx && ctx.state === 'suspended') ctx.resume();
-      removeListeners();
-      return;
+  var unlocked = false;
+
+  function tryUnlock() {
+    if (!started) {
+      initAudio();
     }
-    initAudio();
-    // iOS Safari: AudioContext starts suspended, must resume inside user gesture
-    if (ctx && ctx.state === 'suspended') ctx.resume();
-    removeListeners();
+    if (ctx && ctx.state === 'suspended') {
+      ctx.resume().then(function() {
+        unlocked = true;
+      });
+    } else if (ctx && ctx.state === 'running') {
+      unlocked = true;
+    }
   }
 
-  function removeListeners() {
-    interactionEvents.forEach(function(evt) {
-      document.removeEventListener(evt, onFirstInteraction);
-    });
-  }
-
-  interactionEvents.forEach(function(evt) {
-    var opts = (evt === 'scroll' || evt === 'touchstart' || evt === 'touchend')
-      ? { passive: true } : {};
-    document.addEventListener(evt, onFirstInteraction, opts);
-  });
+  // These are real user gestures on all platforms
+  document.addEventListener('click', tryUnlock);
+  document.addEventListener('touchstart', tryUnlock, { passive: true });
+  document.addEventListener('touchend', tryUnlock, { passive: true });
 
   // Pause when tab hidden, resume when visible
   document.addEventListener('visibilitychange', function() {
     if (!ctx) return;
     if (document.hidden) {
       ctx.suspend();
-    } else {
+    } else if (!muted) {
       ctx.resume();
     }
   });

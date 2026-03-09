@@ -133,6 +133,7 @@ img {
 /* Background gradient rendered by a fixed pseudo-element on main */
 main {
   position: relative;
+  overflow: hidden;
   --wl: 23%;
 }
 
@@ -587,7 +588,7 @@ main::before {
   height: 100%;
   pointer-events: none;
   z-index: 0;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .sealife {

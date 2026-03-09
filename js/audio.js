@@ -398,21 +398,41 @@
     btn.setAttribute('aria-label', muted ? 'Включить звук' : 'Выключить звук');
   }
 
-  // Start on first interaction
-  function onFirstInteraction() {
-    initAudio();
-    document.removeEventListener('click', onFirstInteraction);
-    document.removeEventListener('scroll', onFirstInteraction);
-    document.removeEventListener('touchstart', onFirstInteraction);
-  }
-  document.addEventListener('click', onFirstInteraction, { once: true });
-  document.addEventListener('scroll', onFirstInteraction, { once: true, passive: true });
-  document.addEventListener('touchstart', onFirstInteraction, { once: true, passive: true });
+  // Start on first interaction — mobile requires touchstart/touchend + resume()
+  var interactionEvents = ['click', 'scroll', 'touchstart', 'touchend', 'keydown'];
 
-  // Pause when tab hidden
+  function onFirstInteraction() {
+    if (started) {
+      // Already started but context may be suspended (iOS Safari)
+      if (ctx && ctx.state === 'suspended') ctx.resume();
+      removeListeners();
+      return;
+    }
+    initAudio();
+    // iOS Safari: AudioContext starts suspended, must resume inside user gesture
+    if (ctx && ctx.state === 'suspended') ctx.resume();
+    removeListeners();
+  }
+
+  function removeListeners() {
+    interactionEvents.forEach(function(evt) {
+      document.removeEventListener(evt, onFirstInteraction);
+    });
+  }
+
+  interactionEvents.forEach(function(evt) {
+    var opts = (evt === 'scroll' || evt === 'touchstart' || evt === 'touchend')
+      ? { passive: true } : {};
+    document.addEventListener(evt, onFirstInteraction, opts);
+  });
+
+  // Pause when tab hidden, resume when visible
   document.addEventListener('visibilitychange', function() {
     if (!ctx) return;
-    if (document.hidden) ctx.suspend();
-    else ctx.resume();
+    if (document.hidden) {
+      ctx.suspend();
+    } else {
+      ctx.resume();
+    }
   });
 })();

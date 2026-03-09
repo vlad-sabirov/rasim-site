@@ -254,6 +254,8 @@ document.addEventListener('DOMContentLoaded', function() {
   var depthZoneEl = document.getElementById('depthZone');
   var bubblesContainer = document.getElementById('bubblesContainer');
   var contactSection = document.getElementById('contact');
+  var sidePanel = document.querySelector('.side-panel');
+  var sidePanelIsDark = false;
 
   // ===== Scroll Indicator — show on load =====
   if (scrollIndicator) {
@@ -296,6 +298,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var lastDepthDisplay = -1;
   var lastZoneLabel = '';
+  var lastFillPct = -1;
   var indicatorAtBottom = false;
   var indicatorHideTimer = null;
   var indicatorIsDark = false;
@@ -305,9 +308,10 @@ document.addEventListener('DOMContentLoaded', function() {
   // ===== Bubble Particles =====
   var bubbles = [];
   var maxBubbles = 24;
+  var isUnderwater = false;
 
   function createBubble() {
-    if (bubbles.length >= maxBubbles) return;
+    if (bubbles.length >= maxBubbles || !isUnderwater) return;
 
     var bubble = document.createElement('div');
     bubble.className = 'bubble';
@@ -341,7 +345,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var bubbleTimer = null;
   function scheduleBubble() {
     bubbleTimer = setTimeout(function() {
-      if (!document.hidden) createBubble();
+      if (!document.hidden && isUnderwater) createBubble();
       scheduleBubble();
     }, bubbleRate);
   }
@@ -423,7 +427,24 @@ document.addEventListener('DOMContentLoaded', function() {
           lastZoneLabel = zoneLabel;
         }
 
-        depthFillEl.style.height = (progress * 100) + '%';
+        var fillPct = Math.round(progress * 100);
+        if (fillPct !== lastFillPct) {
+          depthFillEl.style.height = fillPct + '%';
+          lastFillPct = fillPct;
+        }
+      }
+
+      // --- Underwater state for bubbles ---
+      isUnderwater = progress > 0.15;
+
+      // --- Side Panel dark/light ---
+      if (sidePanel) {
+        var shouldSideBeDark = progress > 0.35;
+        if (shouldSideBeDark !== sidePanelIsDark) {
+          sidePanelIsDark = shouldSideBeDark;
+          if (shouldSideBeDark) sidePanel.classList.add('is-dark');
+          else sidePanel.classList.remove('is-dark');
+        }
       }
 
       // --- Scroll Indicator ---
@@ -436,8 +457,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if (contactSection) {
-          var contactTop = contactSection.getBoundingClientRect().top;
-          if (contactTop < window.innerHeight * 0.5) {
+          var contactTop = contactSection.offsetTop - scrollY - window.innerHeight * 0.5;
+          if (contactTop < 0) {
             if (!indicatorAtBottom) {
               indicatorAtBottom = true;
               scrollIndicatorText.textContent = 'Пора погружаться!';

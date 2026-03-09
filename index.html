@@ -9,10 +9,26 @@
   <meta name="theme-color" content="#FAFAFA">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <!-- Google Fonts -->
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Расим Ахмедшин | Digital-специалист">
+  <meta property="og:description" content="Комплексное продвижение бизнеса: SMM, таргетированная реклама, брендинг, веб-разработка, SEO и аналитика. Стратегия. Креатив. Результат.">
+  <meta property="og:image" content="img/og-preview.png">
+  <meta property="og:locale" content="ru_RU">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Расим Ахмедшин | Digital-специалист">
+  <meta name="twitter:description" content="Комплексное продвижение бизнеса: SMM, таргет, брендинг, веб-разработка, SEO и аналитика.">
+  <meta name="twitter:image" content="img/og-preview.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+
+  <!-- Google Fonts — only weights actually used -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
   <!-- GSAP -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
@@ -67,7 +83,34 @@
   <header class="header" id="header">
     <!-- Cartoon Hands SVG -->
     <div class="header__inner">
-      <a href="#hero" class="header__logo" data-cursor-hover>ЛОГО</a>
+      <a href="#hero" class="header__logo" data-cursor-hover>
+        <svg class="header__logo-icon" width="44" height="44" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="logoTip" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#ffffff"/>
+              <stop offset="100%" stop-color="#b8ddf0"/>
+            </linearGradient>
+            <linearGradient id="logoBody" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#7ec8e3"/>
+              <stop offset="100%" stop-color="#2a7da8" stop-opacity="0.6"/>
+            </linearGradient>
+            <filter id="logoGlow">
+              <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#7ec8e3" flood-opacity="0.6"/>
+            </filter>
+          </defs>
+          <!-- Tip -->
+          <polygon points="100,8 55,92 145,92" fill="url(#logoTip)" filter="url(#logoGlow)"/>
+          <!-- Snow highlight -->
+          <polygon points="90,30 100,12 110,30 106,45 94,45" fill="#ffffff" opacity="0.7"/>
+          <!-- Waterline -->
+          <line x1="20" y1="94" x2="180" y2="94" stroke="#7dd3f0" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+          <!-- Underwater body -->
+          <path d="M55,98 C40,98 18,130 14,170 C10,210 35,235 60,248 C78,258 92,260 100,260 C108,260 122,258 140,248 C165,235 190,210 186,170 C182,130 160,98 145,98 Z" fill="url(#logoBody)"/>
+          <!-- Ice texture lines -->
+          <path d="M45 140 Q100 130 155 140" stroke="#a8e4f8" stroke-width="2" fill="none" opacity="0.4"/>
+          <path d="M50 175 Q100 165 150 175" stroke="#7ec8e3" stroke-width="1.5" fill="none" opacity="0.3"/>
+        </svg>
+      </a>
       <button class="hamburger" id="hamburgerBtn" aria-label="Меню" data-cursor-hover>
         <span></span>
         <span></span>
@@ -256,7 +299,7 @@
           <!-- Правая колонка — фото + мини-представление -->
           <div class="hero__photo-block">
             <div class="hero__photo">
-              <img src="img/rasim.jpg" alt="Расим Ахмедшин" loading="lazy">
+              <img src="img/rasim.jpg" alt="Расим Ахмедшин">
             </div>
             <p class="hero__intro">Расим Ахмедшин — digital-специалист. SMM, таргет, брендинг, веб-разработка, SEO и аналитика. Помогаю бизнесу расти в digital.</p>
           </div>
@@ -300,18 +343,18 @@
         <p class="section__text">То, что видит клиент — лишь вершина. Под поверхностью — стратегия, аналитика, креатив и технологии, которые двигают ваш бизнес вперёд.</p>
         <div class="counters">
           <div class="counter">
-            <span class="counter__number" data-target="150">0</span>
+            <span class="counter__number" data-target="30">0</span>
             <span class="counter__plus">+</span>
             <span class="counter__label">Проектов</span>
           </div>
           <div class="counter">
-            <span class="counter__number" data-target="80">0</span>
+            <span class="counter__number" data-target="20">0</span>
             <span class="counter__plus">+</span>
             <span class="counter__label">Клиентов</span>
           </div>
           <div class="counter">
             <span class="counter__number" data-target="5">0</span>
-            <span class="counter__plus"></span>
+            <span class="counter__plus">+</span>
             <span class="counter__label">Лет опыта</span>
           </div>
           <div class="counter">
@@ -427,110 +470,109 @@
         <h2 class="section__title">Мои проекты</h2>
         <p class="section__text">Проекты, которые доказывают — глубина даёт результат</p>
         <div class="portfolio-grid">
-          <div class="portfolio-card" data-cursor-hover>
-            <div class="portfolio-card__image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-              <svg class="portfolio-card__svg" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="100" cy="55" r="30" stroke="rgba(255,255,255,0.7)" stroke-width="2.5"/>
-                <circle cx="100" cy="55" r="18" fill="rgba(255,255,255,0.35)"/>
-                <text x="100" y="60" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="14" font-weight="700">S</text>
-                <rect x="55" y="100" width="90" height="6" rx="3" fill="rgba(255,255,255,0.4)"/>
-                <rect x="70" y="112" width="60" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
-              </svg>
-            </div>
-            <div class="portfolio-card__overlay">
-              <span class="portfolio-card__category">Брендинг</span>
-              <h3 class="portfolio-card__title">Ребрендинг кофейни "Sunrise"</h3>
-              <span class="portfolio-card__stat">+180% узнаваемость</span>
-            </div>
-          </div>
-          <div class="portfolio-card" data-cursor-hover>
-            <div class="portfolio-card__image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-              <svg class="portfolio-card__svg" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="40" y="30" width="120" height="75" rx="6" stroke="rgba(255,255,255,0.7)" stroke-width="2.5"/>
-                <rect x="50" y="42" width="45" height="8" rx="2" fill="rgba(255,255,255,0.4)"/>
-                <rect x="50" y="56" width="100" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
-                <rect x="50" y="65" width="80" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
-                <rect x="50" y="80" width="35" height="14" rx="7" fill="rgba(255,255,255,0.45)"/>
-                <circle cx="150" cy="45" r="5" fill="rgba(255,255,255,0.45)"/>
-                <rect x="70" y="115" width="60" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
-              </svg>
-            </div>
-            <div class="portfolio-card__overlay">
-              <span class="portfolio-card__category">Веб-разработка</span>
-              <h3 class="portfolio-card__title">Интернет-магазин TechStore</h3>
-              <span class="portfolio-card__stat">конверсия 4.2%</span>
-            </div>
-          </div>
-          <div class="portfolio-card" data-cursor-hover>
-            <div class="portfolio-card__image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-              <svg class="portfolio-card__svg" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <polyline points="30,100 55,85 80,90 105,60 130,70 155,40 180,50" stroke="rgba(255,255,255,0.8)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-                <circle cx="155" cy="40" r="4" fill="rgba(255,255,255,0.85)"/>
-                <line x1="30" y1="110" x2="180" y2="110" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
-                <rect x="40" y="120" width="30" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
-                <rect x="85" y="120" width="30" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
-                <rect x="130" y="120" width="30" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
-              </svg>
-            </div>
-            <div class="portfolio-card__overlay">
-              <span class="portfolio-card__category">SMM</span>
-              <h3 class="portfolio-card__title">SMM для фитнес-клуба FitZone</h3>
-              <span class="portfolio-card__stat">+12K подписчиков за 3 мес</span>
-            </div>
-          </div>
-          <div class="portfolio-card" data-cursor-hover>
+          <!-- Leaf Travel -->
+          <a href="https://www.instagram.com/leaf_travel?igsh=MWFkMTRuZ2M3anowaw==" target="_blank" rel="noopener" class="portfolio-card" data-cursor-hover>
             <div class="portfolio-card__image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
               <svg class="portfolio-card__svg" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="100" cy="65" r="35" stroke="rgba(255,255,255,0.55)" stroke-width="2.5"/>
-                <path d="M100 30 A35 35 0 0 1 135 65" stroke="rgba(255,255,255,0.85)" stroke-width="4" stroke-linecap="round" fill="none"/>
-                <text x="100" y="70" text-anchor="middle" fill="rgba(255,255,255,0.9)" font-size="16" font-weight="700">78%</text>
-                <rect x="55" y="115" width="90" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+                <path d="M100 30 C70 50 50 80 60 110 C70 100 85 85 100 75 C115 85 130 100 140 110 C150 80 130 50 100 30Z" fill="rgba(255,255,255,0.35)" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
+                <path d="M100 45 L100 110" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+                <path d="M100 65 L80 55" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
+                <path d="M100 80 L120 70" stroke="rgba(255,255,255,0.4)" stroke-width="1.2"/>
               </svg>
             </div>
             <div class="portfolio-card__overlay">
-              <span class="portfolio-card__category">Таргет</span>
-              <h3 class="portfolio-card__title">Рекламная кампания ресторана</h3>
-              <span class="portfolio-card__stat">ROAS 780%</span>
+              <span class="portfolio-card__category">Таргет · $5 000/мес</span>
+              <h3 class="portfolio-card__title">Leaf Travel — Турпакеты</h3>
+              <span class="portfolio-card__stat">2 702 лида · $1.85 за лид · 58% квалификация</span>
+              <span class="portfolio-card__instagram">@leaf_travel</span>
             </div>
-          </div>
-          <div class="portfolio-card" data-cursor-hover>
-            <div class="portfolio-card__image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
-              <svg class="portfolio-card__svg" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="50" y="25" width="100" height="65" rx="4" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
-                <rect x="60" y="35" width="80" height="6" rx="3" fill="rgba(255,255,255,0.4)"/>
-                <rect x="60" y="47" width="50" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
-                <rect x="60" y="57" width="65" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
-                <rect x="60" y="70" width="30" height="12" rx="6" fill="rgba(255,255,255,0.45)"/>
-                <rect x="70" y="100" width="24" height="30" rx="3" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-                <rect x="106" y="100" width="24" height="30" rx="3" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-                <rect x="76" y="108" width="12" height="3" rx="1.5" fill="rgba(255,255,255,0.35)"/>
-                <rect x="112" y="108" width="12" height="3" rx="1.5" fill="rgba(255,255,255,0.35)"/>
-              </svg>
-            </div>
-            <div class="portfolio-card__overlay">
-              <span class="portfolio-card__category">Веб-разработка</span>
-              <h3 class="portfolio-card__title">Лендинг стартапа FinFlow</h3>
-              <span class="portfolio-card__stat">98/100 PageSpeed</span>
-            </div>
-          </div>
-          <div class="portfolio-card" data-cursor-hover>
+          </a>
+          <!-- Artique -->
+          <a href="https://www.instagram.com/artique_uz?igsh=YXYwdXF6OXNpNGZn" target="_blank" rel="noopener" class="portfolio-card" data-cursor-hover>
             <div class="portfolio-card__image" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">
               <svg class="portfolio-card__svg" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="35" y="30" width="55" height="55" rx="6" fill="rgba(255,255,255,0.3)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
-                <rect x="100" y="30" width="65" height="26" rx="4" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
-                <rect x="100" y="62" width="65" height="23" rx="4" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
-                <circle cx="62" cy="57" r="10" stroke="rgba(255,255,255,0.65)" stroke-width="2"/>
-                <path d="M58 57 L62 61 L68 53" stroke="rgba(255,255,255,0.8)" stroke-width="2" fill="none"/>
-                <rect x="50" y="100" width="100" height="5" rx="2.5" fill="rgba(255,255,255,0.3)"/>
-                <rect x="65" y="112" width="70" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+                <path d="M100 25 L85 70 L60 70 L80 95 L72 130 L100 110 L128 130 L120 95 L140 70 L115 70 Z" fill="rgba(255,255,255,0.3)" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
+                <circle cx="100" cy="80" r="12" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
               </svg>
             </div>
             <div class="portfolio-card__overlay">
-              <span class="portfolio-card__category">Дизайн</span>
-              <h3 class="portfolio-card__title">Контент для бренда одежды</h3>
-              <span class="portfolio-card__stat">300+ единиц контента</span>
+              <span class="portfolio-card__category">Таргет · $800/мес</span>
+              <h3 class="portfolio-card__title">Artique — Премиум хрусталь</h3>
+              <span class="portfolio-card__stat">60+ продаж · средний чек 2 млн · рост 300%</span>
+              <span class="portfolio-card__instagram">@artique_uz</span>
             </div>
-          </div>
+          </a>
+          <!-- Nephite Catering -->
+          <a href="https://www.instagram.com/nephritecatering?igsh=MTkycXlidWF2NGdkNQ==" target="_blank" rel="noopener" class="portfolio-card" data-cursor-hover>
+            <div class="portfolio-card__image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+              <svg class="portfolio-card__svg" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <ellipse cx="100" cy="85" rx="45" ry="15" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+                <path d="M55 85 C55 55 75 35 100 35 C125 35 145 55 145 85" fill="rgba(255,255,255,0.3)" stroke="rgba(255,255,255,0.7)" stroke-width="2"/>
+                <line x1="100" y1="25" x2="100" y2="35" stroke="rgba(255,255,255,0.6)" stroke-width="2" stroke-linecap="round"/>
+                <path d="M90 30 Q100 20 110 30" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none"/>
+              </svg>
+            </div>
+            <div class="portfolio-card__overlay">
+              <span class="portfolio-card__category">Таргет · $300/мес</span>
+              <h3 class="portfolio-card__title">Nephite Catering — Доставка обедов</h3>
+              <span class="portfolio-card__stat">50 доставок/день · $1.54 за лид · поток x5</span>
+              <span class="portfolio-card__instagram">@nephritecatering</span>
+            </div>
+          </a>
+          <!-- EvoEva -->
+          <a href="https://www.instagram.com/evoeva.uz?igsh=MWJnOWQyZ3M0NWpo" target="_blank" rel="noopener" class="portfolio-card" data-cursor-hover>
+            <div class="portfolio-card__image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+              <svg class="portfolio-card__svg" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="60" r="25" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+                <circle cx="100" cy="60" r="15" fill="rgba(255,255,255,0.2)" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+                <circle cx="100" cy="60" r="6" fill="rgba(255,255,255,0.35)"/>
+                <path d="M60 105 Q80 95 100 100 Q120 105 140 95" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none"/>
+              </svg>
+            </div>
+            <div class="portfolio-card__overlay">
+              <span class="portfolio-card__category">SMM · $1 000/мес</span>
+              <h3 class="portfolio-card__title">EvoEva — Косметика</h3>
+              <span class="portfolio-card__stat">+2 000 подписчиков/мес · рост узнаваемости</span>
+              <span class="portfolio-card__instagram">@evoeva.uz</span>
+            </div>
+          </a>
+          <!-- Nabeglavi B2B -->
+          <a href="https://www.instagram.com/nabeghlavi.uz?igsh=N3A1bnI5MTh3eDgx" target="_blank" rel="noopener" class="portfolio-card" data-cursor-hover>
+            <div class="portfolio-card__image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+              <svg class="portfolio-card__svg" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M85 30 L85 100 Q85 115 100 115 Q115 115 115 100 L115 30" stroke="rgba(255,255,255,0.7)" stroke-width="2.5" fill="rgba(255,255,255,0.2)"/>
+                <path d="M85 30 Q100 20 115 30" stroke="rgba(255,255,255,0.5)" stroke-width="2" fill="none"/>
+                <path d="M78 50 L85 50" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+                <path d="M115 50 L122 50" stroke="rgba(255,255,255,0.4)" stroke-width="1.5"/>
+                <ellipse cx="100" cy="80" rx="12" ry="18" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
+              </svg>
+            </div>
+            <div class="portfolio-card__overlay">
+              <span class="portfolio-card__category">Таргет · $500/мес</span>
+              <h3 class="portfolio-card__title">Nabeglavi B2B — Премиум вода</h3>
+              <span class="portfolio-card__stat">11 оптовых партнёров · рост узнаваемости</span>
+              <span class="portfolio-card__instagram">@nabeghlavi.uz</span>
+            </div>
+          </a>
+          <!-- CleanServise -->
+          <a href="https://www.instagram.com/cleanservice.uz?igsh=OWw1MDBlaXUxdTBi" target="_blank" rel="noopener" class="portfolio-card" data-cursor-hover>
+            <div class="portfolio-card__image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+              <svg class="portfolio-card__svg" viewBox="0 0 200 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="60" y="40" width="80" height="55" rx="8" fill="rgba(255,255,255,0.25)" stroke="rgba(255,255,255,0.6)" stroke-width="2"/>
+                <path d="M75 65 Q100 50 125 65" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" fill="none"/>
+                <path d="M75 75 Q100 60 125 75" stroke="rgba(255,255,255,0.4)" stroke-width="1.2" fill="none"/>
+                <path d="M75 85 Q100 70 125 85" stroke="rgba(255,255,255,0.3)" stroke-width="1" fill="none"/>
+                <circle cx="100" cy="115" r="8" fill="rgba(255,255,255,0.3)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+                <path d="M96 115 L100 119 L106 111" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" fill="none"/>
+              </svg>
+            </div>
+            <div class="portfolio-card__overlay">
+              <span class="portfolio-card__category">Таргет · $400/мес</span>
+              <h3 class="portfolio-card__title">CleanServise — Мытьё ковров</h3>
+              <span class="portfolio-card__stat">20+ звонков/день · 25+ обращений · 10+ заказов</span>
+              <span class="portfolio-card__instagram">@cleanservice.uz</span>
+            </div>
+          </a>
         </div>
       </div>
     </section>
@@ -584,6 +626,30 @@
               </svg>
               Написать в Telegram
             </a>
+          </div>
+          <!-- Success Overlay -->
+          <div class="contact-form__success" id="formSuccess">
+            <div class="contact-form__success-bubbles">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <svg class="contact-form__success-icon" viewBox="0 0 200 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="successTip" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#ffffff"/>
+                  <stop offset="100%" stop-color="#7ec8e3"/>
+                </linearGradient>
+                <linearGradient id="successBody" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#7ec8e3"/>
+                  <stop offset="100%" stop-color="#2a7da8" stop-opacity="0.5"/>
+                </linearGradient>
+              </defs>
+              <polygon points="100,8 55,92 145,92" fill="url(#successTip)"/>
+              <line x1="20" y1="94" x2="180" y2="94" stroke="#7dd3f0" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
+              <path d="M55,98 C40,98 18,130 14,170 C10,210 35,235 60,248 C78,258 92,260 100,260 C108,260 122,258 140,248 C165,235 190,210 186,170 C182,130 160,98 145,98 Z" fill="url(#successBody)"/>
+              <path d="M72 165 L92 185 L130 140" stroke="#fff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+            <span class="contact-form__success-title">Заявка отправлена!</span>
+            <span class="contact-form__success-text">Ваше сообщение уже на глубине. Скоро всплывём с ответом.</span>
           </div>
         </form>
       </div>

@@ -216,9 +216,19 @@ main::before {
 }
 
 .header__logo {
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: 2px;
+  display: flex;
+  align-items: center;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.header__logo:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
+
+.header__logo-icon {
+  display: block;
+  filter: drop-shadow(0 0 8px rgba(126,200,227,0.4));
 }
 
 /* Hamburger */
@@ -279,7 +289,6 @@ main::before {
   width: 95px;
   height: 160px;
   will-change: transform;
-  top: -170px; /* hidden above viewport */
   filter: drop-shadow(0 6px 16px rgba(0,0,0,0.3));
 }
 
@@ -655,7 +664,7 @@ main::before {
   padding: 40px 32px;
   transition: all var(--transition);
   color: var(--dark-text);
-  will-change: transform, opacity;
+  contain: layout style;
 }
 
 .service-card:hover {
@@ -723,7 +732,7 @@ main::before {
   overflow: hidden;
   aspect-ratio: 4/3;
   cursor: none;
-  will-change: transform, opacity;
+  contain: layout style;
 }
 
 .portfolio-card__image {
@@ -739,13 +748,14 @@ main::before {
 .portfolio-card__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 60%);
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 24px;
   opacity: 0;
   transition: opacity 0.4s ease;
+  z-index: 2;
 }
 
 .portfolio-card:hover .portfolio-card__overlay {
@@ -757,14 +767,16 @@ main::before {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: var(--accent);
+  color: #2ecc71;
   margin-bottom: 8px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
 }
 
 .portfolio-card__title {
   font-size: 1.1rem;
   font-weight: 600;
   color: #fff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
 }
 
 .portfolio-card__svg {
@@ -778,16 +790,46 @@ main::before {
 .portfolio-card__stat {
   font-size: 0.75rem;
   font-weight: 600;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.9);
   margin-top: 6px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
+
+.portfolio-card__instagram {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.portfolio-card__instagram::before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='2' y='2' width='20' height='20' rx='5'/%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Ccircle cx='17.5' cy='6.5' r='1.5'/%3E%3C/svg%3E");
+  background-size: contain;
+  flex-shrink: 0;
+}
+
+a.portfolio-card {
+  text-decoration: none;
+  display: block;
 }
 
 /* ===== Contact Form ===== */
 .contact-form {
   max-width: 600px;
   margin: 0 auto;
+  position: relative;
 }
 
 .contact-form__input,
@@ -950,6 +992,83 @@ main::before {
   display: flex;
   gap: 16px;
   margin-top: 8px;
+}
+
+/* ===== Form Success Overlay ===== */
+.contact-form__success {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(4,21,32,0.95);
+  border-radius: 16px;
+  border: 1px solid rgba(126,200,227,0.3);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+  z-index: 10;
+}
+
+.contact-form__success.is-visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.contact-form__success-icon {
+  width: 80px;
+  height: 80px;
+  animation: successFloat 3s ease-in-out infinite;
+}
+
+@keyframes successFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.contact-form__success-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.contact-form__success-text {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.7);
+  text-align: center;
+  max-width: 300px;
+  line-height: 1.6;
+}
+
+.contact-form__success-bubbles {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.contact-form__success-bubbles span {
+  position: absolute;
+  bottom: -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(126,200,227,0.4), rgba(126,200,227,0.1));
+  animation: successBubbleRise 4s ease-in infinite;
+}
+
+.contact-form__success-bubbles span:nth-child(1) { left: 15%; width: 8px; height: 8px; animation-delay: 0s; animation-duration: 3.5s; }
+.contact-form__success-bubbles span:nth-child(2) { left: 35%; width: 5px; height: 5px; animation-delay: 0.8s; animation-duration: 4s; }
+.contact-form__success-bubbles span:nth-child(3) { left: 55%; width: 10px; height: 10px; animation-delay: 0.3s; animation-duration: 3s; }
+.contact-form__success-bubbles span:nth-child(4) { left: 75%; width: 6px; height: 6px; animation-delay: 1.2s; animation-duration: 4.5s; }
+.contact-form__success-bubbles span:nth-child(5) { left: 90%; width: 7px; height: 7px; animation-delay: 0.6s; animation-duration: 3.8s; }
+
+@keyframes successBubbleRise {
+  0% { transform: translateY(0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-500px); opacity: 0; }
 }
 
 /* ===== Footer ===== */
@@ -1405,6 +1524,27 @@ main::before {
   }
 
   .depth-meter { display: none; }
+}
+
+/* Reduce motion for accessibility and battery */
+@media (prefers-reduced-motion: reduce) {
+  .hero-iceberg--left,
+  .hero-iceberg--right,
+  .waterline__wave--1,
+  .waterline__wave--2,
+  .waterline__wave--3,
+  .scroll-indicator {
+    animation: none !important;
+  }
+
+  .portfolio-card__image {
+    transition: none;
+  }
+
+  .fullscreen-menu,
+  .fullscreen-menu__link {
+    transition-duration: 0.01s !important;
+  }
 }
 
 /* Very small phones (≤360px) — iPhone SE 1st gen, Galaxy A series */

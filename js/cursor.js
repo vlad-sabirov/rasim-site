@@ -15,24 +15,24 @@
   let mouseX = 0, mouseY = 0;
   let outerX = 0, outerY = 0;
   const lerp = 0.15;
+  let cursorVisible = true;
+  let rafId = null;
 
   document.addEventListener('mousemove', function(e) {
     mouseX = e.clientX;
     mouseY = e.clientY;
-    // Inner follows instantly
     inner.style.left = mouseX + 'px';
     inner.style.top = mouseY + 'px';
   });
 
-  // Outer follows with delay (lerp)
   function animateOuter() {
     outerX += (mouseX - outerX) * lerp;
     outerY += (mouseY - outerY) * lerp;
     outer.style.left = outerX + 'px';
     outer.style.top = outerY + 'px';
-    requestAnimationFrame(animateOuter);
+    if (cursorVisible) rafId = requestAnimationFrame(animateOuter);
   }
-  animateOuter();
+  rafId = requestAnimationFrame(animateOuter);
 
   // Hover effect on interactive elements
   const hoverElements = document.querySelectorAll('[data-cursor-hover], a, button, input, textarea');
@@ -48,13 +48,17 @@
     });
   });
 
-  // Hide cursor when leaving window
+  // Pause rAF when cursor leaves window
   document.addEventListener('mouseleave', function() {
+    cursorVisible = false;
     inner.style.opacity = '0';
     outer.style.opacity = '0';
+    if (rafId) { cancelAnimationFrame(rafId); rafId = null; }
   });
   document.addEventListener('mouseenter', function() {
+    cursorVisible = true;
     inner.style.opacity = '1';
     outer.style.opacity = '0.5';
+    if (!rafId) rafId = requestAnimationFrame(animateOuter);
   });
 })();

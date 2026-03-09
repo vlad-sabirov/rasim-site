@@ -32,31 +32,8 @@
   }
 
   // ----- Side Panel: adapt color to dark/light sections -----
-  var sidePanel = document.querySelector('.side-panel');
-  var sections = document.querySelectorAll('.section');
-  var darkSections = ['section-portfolio', 'section-contact'];
-
-  function updateSidePanelColor() {
-    var scrollY = window.scrollY + window.innerHeight / 2;
-
-    for (var i = sections.length - 1; i >= 0; i--) {
-      var section = sections[i];
-      if (scrollY >= section.offsetTop) {
-        var isDark = darkSections.some(function(cls) {
-          return section.classList.contains(cls);
-        });
-        if (isDark) {
-          sidePanel.classList.add('is-dark');
-        } else {
-          sidePanel.classList.remove('is-dark');
-        }
-        break;
-      }
-    }
-  }
-
-  window.addEventListener('scroll', updateSidePanelColor, { passive: true });
-  updateSidePanelColor();
+  // Color update is handled in the unified scroll handler in animations.js
+  // via progress-based dark mode detection
 
   // ----- Contact Form: send via Cloudflare Worker -----
   var contactForm = document.getElementById('contactForm');
@@ -92,8 +69,13 @@
       .then(function(data) {
         if (data.ok) {
           contactForm.reset();
-          submitBtn.textContent = 'Отправлено!';
-          setTimeout(function() { submitBtn.textContent = originalText; submitBtn.disabled = false; }, 3000);
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+          var successOverlay = document.getElementById('formSuccess');
+          if (successOverlay) {
+            successOverlay.classList.add('is-visible');
+            setTimeout(function() { successOverlay.classList.remove('is-visible'); }, 5000);
+          }
         } else {
           submitBtn.textContent = 'Ошибка, попробуйте ещё';
           setTimeout(function() { submitBtn.textContent = originalText; submitBtn.disabled = false; }, 3000);

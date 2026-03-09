@@ -48,6 +48,7 @@
   <!-- Bubble particles container -->
   <div class="bubbles-container" id="bubblesContainer"></div>
 
+
   <!-- Depth Meter -->
   <div class="depth-meter" id="depthMeter">
     <div class="depth-meter__value"><span id="depthValue">0</span>m</div>
@@ -71,6 +72,18 @@
         <circle cx="17.5" cy="6.5" r="1.5"/>
       </svg>
     </a>
+    <button class="side-panel__btn" id="soundToggle" aria-label="Выключить звук" data-cursor-hover>
+      <svg class="sound-icon-on" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+        <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+      </svg>
+      <svg class="sound-icon-off" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+        <line x1="23" y1="9" x2="17" y2="15"/>
+        <line x1="17" y1="9" x2="23" y2="15"/>
+      </svg>
+    </button>
     <button class="side-panel__btn" id="scrollTopBtn" aria-label="Наверх" data-cursor-hover>
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 19V5"/>
@@ -221,6 +234,9 @@
 
   <!-- Main Content -->
   <main>
+    <!-- Sea life container -->
+    <div class="sealife-container" id="sealifeContainer"></div>
+
     <!-- Hero -->
     <section class="section section-hero" id="hero">
       <!-- Left Iceberg -->
@@ -768,6 +784,8 @@
   <script src="js/menu.js" defer></script>
   <script src="js/animations.js" defer></script>
   <script src="js/main.js" defer></script>
+  <script src="js/sealife.js" defer></script>
+  <script src="js/audio.js" defer></script>
 </body>
 </html>
 <!-- Developed by Victory | https://t.me/portfolio_by_victory -->

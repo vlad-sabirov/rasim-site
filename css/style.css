@@ -1192,10 +1192,6 @@ a.portfolio-card {
   border-color: rgba(255,255,255,0.15);
 }
 
-/* Sound toggle button */
-#soundToggle .sound-icon-off { display: none; }
-#soundToggle.is-muted .sound-icon-on { display: none; }
-#soundToggle.is-muted .sound-icon-off { display: block; }
 
 /* ===== Responsive ===== */
 

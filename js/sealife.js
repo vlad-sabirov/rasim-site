@@ -44,24 +44,75 @@
     }
   ];
 
-  // ===== Whale SVG — realistic humpback =====
+  // ===== Whale SVG — realistic humpback from reference photo =====
+  // Reference: massive body, blunt broad head, flat top, deep belly,
+  // long mouth line, small dorsal hump, long white pectoral fin,
+  // compact dark tail flukes
   function whaleSVG(color) {
-    return '<svg width="220" height="80" viewBox="0 0 220 80" fill="none" xmlns="http://www.w3.org/2000/svg">'
-      + '<path d="M25,42 Q15,36 12,28 Q10,20 18,14 Q35,4 70,6 Q105,3 140,8 Q170,14 190,24 Q205,34 200,44 Q192,54 170,58 Q135,64 95,62 Q55,60 35,52 Z" fill="' + color + '" opacity="0.4"/>'
-      + '<path d="M190,24 Q198,20 206,22 Q214,28 210,36 Q204,42 200,44 Q196,38 190,24 Z" fill="' + color + '" opacity="0.38"/>'
-      + '<path d="M200,44 Q208,40 212,34" stroke="rgba(0,0,0,0.08)" stroke-width="0.8" fill="none"/>'
-      + '<ellipse cx="198" cy="28" rx="2.5" ry="2" fill="rgba(0,0,0,0.3)"/>'
-      + '<ellipse cx="198.5" cy="27.5" rx="1" ry="0.8" fill="rgba(255,255,255,0.15)"/>'
-      + '<path d="M50,52 Q85,58 130,56 Q165,50 190,38 Q185,48 165,55 Q130,62 95,60 Q60,58 50,52 Z" fill="rgba(255,255,255,0.07)"/>'
-      + '<path d="M140,42 Q155,40 170,36" stroke="rgba(255,255,255,0.04)" stroke-width="0.6" fill="none"/>'
-      + '<path d="M130,46 Q150,44 168,40" stroke="rgba(255,255,255,0.03)" stroke-width="0.5" fill="none"/>'
-      + '<path d="M25,42 Q18,36 8,26 Q3,20 2,16 Q4,14 8,16 Q14,22 20,30 Z" fill="' + color + '" opacity="0.35"/>'
-      + '<path d="M25,42 Q18,48 8,56 Q3,62 2,66 Q4,68 8,64 Q14,56 20,48 Z" fill="' + color + '" opacity="0.35"/>'
-      + '<path d="M85,8 Q90,3 96,6 Q98,10 95,12" fill="' + color + '" opacity="0.3"/>'
-      + '<path d="M148,48 Q140,60 128,68 Q122,72 118,70 Q120,64 128,56 Q136,48 145,46 Z" fill="' + color + '" opacity="0.3"/>'
-      + '<circle cx="80" cy="15" r="1.5" fill="rgba(255,255,255,0.04)"/>'
-      + '<circle cx="160" cy="20" r="1.2" fill="rgba(255,255,255,0.03)"/>'
-      + '<path d="M55,10 Q90,6 130,10" stroke="rgba(255,255,255,0.04)" stroke-width="0.8" fill="none"/>'
+    return '<svg width="300" height="105" viewBox="0 0 300 105" fill="none" xmlns="http://www.w3.org/2000/svg">'
+      // Head at RIGHT (high X), tail at LEFT (low X). Code flips via scaleX.
+      //
+      // === MAIN BODY — one continuous silhouette ===
+      // Key fixes: head extends forward with smooth taper, tail narrows gradually
+      + '<path d="'
+        + 'M18,50 '                              // tail stock (narrow)
+        + 'C24,48 34,44 48,40 '                  // tail stock gradually widens
+        + 'C62,36 78,30 95,24 '                  // body keeps expanding smoothly
+        + 'C115,17 140,13 170,12 '               // back peak area
+        + 'C200,12 225,16 245,24 '               // back slopes toward head
+        + 'C260,30 272,36 280,42 '               // head top — gentle forward slope
+        + 'C286,46 290,50 290,54 '               // snout tip — rounded, extended
+        + 'C290,58 286,62 280,64 '               // snout curves under smoothly
+        + 'C270,68 255,70 240,72 '               // lower jaw / mouth line starts
+        + 'C215,76 190,78 165,78 '               // mouth line extends far back
+        + 'C135,78 110,76 90,72 '                // deep belly
+        + 'C70,66 55,60 44,56 '                  // belly rises toward tail
+        + 'C34,53 26,52 18,52 Z'                 // smooth gradual taper to tail
+        + '" fill="' + color + '" opacity="0.42"/>'
+      // === DARKER DORSAL SHADING ===
+      + '<path d="'
+        + 'M65,32 C90,22 125,14 165,12 '
+        + 'C200,12 230,16 255,26 '
+        + 'C270,32 280,38 285,44 '
+        + 'C278,38 265,28 250,22 '
+        + 'C225,14 195,12 165,14 '
+        + 'C130,16 90,26 65,32 Z'
+        + '" fill="' + color + '" opacity="0.15"/>'
+      // === LIGHTER BELLY ===
+      + '<path d="'
+        + 'M240,72 C215,76 190,78 165,78 '
+        + 'C135,78 110,76 90,72 '
+        + 'C70,66 55,60 44,56 '
+        + 'C55,64 75,72 95,78 '
+        + 'C120,82 150,84 175,82 '
+        + 'C205,80 228,74 248,68 Z'
+        + '" fill="rgba(200,220,240,0.12)"/>'
+      // === EYE ===
+      + '<ellipse cx="272" cy="48" rx="2.2" ry="1.8" fill="rgba(0,0,0,0.25)"/>'
+      + '<ellipse cx="272.5" cy="47.5" rx="0.8" ry="0.6" fill="rgba(255,255,255,0.1)"/>'
+      // === MOUTH LINE ===
+      + '<path d="M286,60 C276,66 260,70 235,74" stroke="rgba(0,0,0,0.08)" stroke-width="0.8" fill="none"/>'
+      // === VENTRAL PLEATS ===
+      + '<path d="M255,70 C240,72 220,74 200,76" stroke="rgba(200,220,240,0.07)" stroke-width="0.8" fill="none"/>'
+      + '<path d="M262,68 C246,70 228,72 210,74" stroke="rgba(200,220,240,0.06)" stroke-width="0.7" fill="none"/>'
+      + '<path d="M268,66 C252,68 234,70 216,72" stroke="rgba(200,220,240,0.05)" stroke-width="0.6" fill="none"/>'
+      + '<path d="M274,64 C258,66 240,68 222,70" stroke="rgba(200,220,240,0.04)" stroke-width="0.5" fill="none"/>'
+      // === TAIL FLUKES — compact, dark, swept crescent ===
+      // Upper fluke
+      + '<path d="M18,49 C14,46 8,39 4,32 C2.5,28 2.5,26 4.5,27 C7,29 12,36 16,44 C17,46 18,48 18,49 Z" fill="' + color + '" opacity="0.44"/>'
+      // Lower fluke
+      + '<path d="M18,53 C14,56 8,63 4,70 C2.5,74 2.5,76 4.5,75 C7,73 12,66 16,58 C17,56 18,54 18,53 Z" fill="' + color + '" opacity="0.44"/>'
+      // Fluke notch
+      + '<path d="M18,48.5 L15.5,51 L18,53.5" stroke="rgba(0,0,0,0.07)" stroke-width="0.6" fill="none"/>'
+      // === DORSAL FIN — tiny hump ===
+      + '<path d="M145,13 C148,8 152,7 154,10 C155,13 153,16 150,17 C148,15 146,14 145,13 Z" fill="' + color + '" opacity="0.35"/>'
+      // === PECTORAL FIN — long, light, sweeps down ===
+      + '<path d="'
+        + 'M210,74 C204,82 192,90 180,96 '
+        + 'C176,98 173,97 174,94 '
+        + 'C176,90 186,80 198,72 '
+        + 'C204,68 208,70 210,74 Z'
+        + '" fill="rgba(190,215,235,0.22)"/>'
       + '</svg>';
   }
 
